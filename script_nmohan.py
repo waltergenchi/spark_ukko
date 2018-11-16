@@ -2,12 +2,12 @@ from pyspark import SparkContext, SparkConf
 import os
 import sys
 
-dataset = "data-1-sample.txt" ##change this to your dataset path
+dataset = "data-1.txt" ##change this to your dataset path
 
 conf = (SparkConf()
         .setAppName("genchi")           ##change app name to your username
         .setMaster("spark://128.214.48.227:7077")
-        .set("spark.cores.max", "10")  ##dont be too greedy ;)
+        .set("spark.cores.max", "30")  ##dont be too greedy ;)
         .set("spark.rdd.compress", "true")
         .set("spark.broadcast.compress", "true"))
 sc = SparkContext(conf=conf)
