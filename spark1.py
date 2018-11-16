@@ -24,7 +24,7 @@ def barbaric_median():
     # data = sorted(data)
     # data = 
     import numpy as np
-    
+
     def mean(m1, m2=None):
     #Mean function. If the number of data is even, the 2 middle elements must be averaged
         if m2 is None:
@@ -96,4 +96,4 @@ def main():
 
 if __name__ == '__main__':
     barbaric_median()
-    main()
+    #main()
