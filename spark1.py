@@ -71,11 +71,18 @@ def main():
     median_pos = count//2
     #groupByKey vs reduceByKey !!
     data_by_keys = data.groupByKey()
+
+    print("*****")
+    data_by_keys.take(10).foreach(println)
+    print("*****")
+
     #data_by_keys = data.reduceByKey() is it more efficient?
     counts_by_tens = data_by_keys.mapValues(len)
+
     print("*****")
-    print((counts_by_tens.collect()))
+    counts_by_tens.take(10).foreach(println)
     print("*****")
+    
     # Detection of in which bag of values is the median
     acc = 0
     # cbt_tmp = sorted(counts_by_tens.collect())
@@ -97,5 +104,5 @@ def main():
     print("Count = %.8f" % count)
 
 if __name__ == '__main__':
-    barbaric_median()
-    #main()
+    #barbaric_median()
+    main()
