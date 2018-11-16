@@ -39,9 +39,9 @@ def barbaric_median():
         m2 = data[len(data)//2]
         m = mean(m1, m2)
     else:
-        mean = mean(data[len(data)//2])
+        mean_comp= mean(data[len(data)//2])
 
-    print("COMPUTED MEDIAN", mean)
+    print("COMPUTED MEDIAN", mean_comp)
 
 # def offsetmean(data, offset):
 #     return data.sortByKey().
