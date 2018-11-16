@@ -119,7 +119,7 @@ def main():
         med_comp = mean(m1, m2)
     else:
         med_comp= mean(d[median_pos-acc])
-    print("The median is %.8f" % med_comp)
+    print("The median is %.16f" % med_comp)
 
     print("Count = %.8f" % count)
 
