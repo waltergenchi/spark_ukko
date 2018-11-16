@@ -15,7 +15,7 @@ sc = SparkContext(conf=conf)
 data = sc.textFile(dataset)
 data = data.map(lambda s: float(s))
 
-count = data.count()
+#count = data.count()
 sum = data.sum()
 
 print "Count = %.8f" % count
