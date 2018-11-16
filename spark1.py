@@ -5,7 +5,7 @@ import sys
 def define_key(number): # TODO : iteration (split /10 every time)
     return number//10
 
-def barbaric_mean():
+def barbaric_median():
     dataset = "data-1-sample.txt"
     conf = (SparkConf()
             .setAppName("genchi")           ##change app name to your username
@@ -24,6 +24,13 @@ def barbaric_mean():
     # data = sorted(data)
     # data = 
     import numpy as np
+    def mean(m1, m2=None):
+    """ Mean function. If the number of data is even, the 2 middle elements must be averaged """
+    if m2 is None:
+        return m1
+    else:
+        return (m1+m2)*0.5
+
     print("ACTUAL MEDIAN", np.median(data))
     if count%2==0:              # If number even, need to average the two middle numbers
         m1 = data[len(data)//2-1]
@@ -32,17 +39,11 @@ def barbaric_mean():
     else:
         mean = mean(data[len(data)//2])
 
-    print("COMPUTED MEAN", mean)
+    print("COMPUTED MEDIAN", mean)
 
 # def offsetmean(data, offset):
 #     return data.sortByKey().
 
-def mean(m1, m2=None):
-    """ Mean function. If the number of data is even, the 2 middle elements must be averaged """
-    if m2 is None:
-        return m1
-    else:
-        return (m1+m2)*0.5
 def main():
     # Expected answer on data sample : 50.642053915000005
     dataset = "data-1-sample.txt"
@@ -69,11 +70,12 @@ def main():
     #data_by_keys = data.reduceByKey() is it more efficient?
     counts_by_tens = data_by_keys.mapValues(len)
     print("*****")
-    sorted(counts_by_tens.collect())
+    print((counts_by_tens.collect()))
     print("*****")
     # Detection of in which bag of values is the median
     acc = 0
-    # cbt_tmp = sorted(counts_by_tens.collect()) is it less efficient?
+    # cbt_tmp = sorted(counts_by_tens.collect())
+    # is it less efficient?
     cbt_tmp = counts_by_tens.sortByKey().collect()
     # cbt_tmp e un iteratore, k e key, v e value
     for k,v in cbt_tmp:
@@ -91,5 +93,5 @@ def main():
     print("Count = %.8f" % count)
 
 if __name__ == '__main__':
-    #barbaric_mean()
+    barbaric_mean()
     main()
