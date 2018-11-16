@@ -69,7 +69,7 @@ def main():
     #data_by_keys = data.reduceByKey() is it more efficient?
     counts_by_tens = data_by_keys.mapValues(len)
     print("*****")
-    counts_by_tens.collect()
+    sorted(counts_by_tens.collect())
     print("*****")
     # Detection of in which bag of values is the median
     acc = 0
