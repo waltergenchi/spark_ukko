@@ -111,7 +111,7 @@ def main():
     # Print the content of the data
     d = sorted(data_by_keys.mapValues(list).lookup(bag_i)[0])
     print(type(d))
-    print(d)
+    #print(d)
     med=d[median_pos-acc]
     if count%2==0:
         m1 = d[median_pos-acc-1]
