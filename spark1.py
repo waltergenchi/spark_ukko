@@ -73,7 +73,7 @@ def main():
     data_by_keys = data.groupByKey()
 
     print("*****")
-    data_by_keys.take(10).foreach(println)
+    print(data_by_keys.take(10))
     print("*****")
 
     #data_by_keys = data.reduceByKey() is it more efficient?
@@ -82,7 +82,7 @@ def main():
     print("*****")
     counts_by_tens.take(10).foreach(println)
     print("*****")
-    
+
     # Detection of in which bag of values is the median
     acc = 0
     # cbt_tmp = sorted(counts_by_tens.collect())
