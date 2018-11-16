@@ -2,10 +2,10 @@ from pyspark import SparkContext, SparkConf
 import os
 import sys
 
-dataset = "/wrk/nmohan/distsys-dir/datasets/data-1-sample.txt" ##change this to your dataset path
+dataset = "../spark-data/data-1-sample.txt" ##change this to your dataset path
 
 conf = (SparkConf()
-        .setAppName("nmohan")           ##change app name to your username
+        .setAppName("genchi")           ##change app name to your username
         .setMaster("spark://128.214.48.227:7077")
         .set("spark.cores.max", "10")  ##dont be too greedy ;)
         .set("spark.rdd.compress", "true")
