@@ -63,16 +63,15 @@ def main():
 
     data = sc.textFile(dataset)\
              .map(lambda s: float(s))\
-             .map(lambda n: (define_key(n), n))
-    print("*****")
-    data.collect.foreach(println)
-    print("*****")
+             .map(lambda n: (define_key(n), n)) # ogni numero viene mappato al bag, e.g. 45 -> (4,45)
     count = data.count()
 
     # If the whole dataset is sorted -- it won't ! --, the position of
     # the median should be in the middle
     median_pos = count//2
     #groupByKey vs reduceByKey !!
+
+    # ottengo qualcosa del tipo [(0,[numeri da 0 a 9.999]) , ... , (10,[numeri da 90 a 100])]
     data_by_keys = data.groupByKey()
 
     print("*****")
@@ -80,12 +79,13 @@ def main():
     print("*****")
 
     #data_by_keys = data.reduceByKey() is it more efficient?
-    counts_by_tens = data_by_keys.mapValues(len)
+    #counts_by_tens = data_by_keys.mapValues(len)
 
     print("*****")
     #counts_by_tens.take(10).foreach(println)
     print("*****")
 
+    counts_by_tens = data.aggregateByKey()
     # Detection of in which bag of values is the median
     acc = 0
     # cbt_tmp = sorted(counts_by_tens.collect())
