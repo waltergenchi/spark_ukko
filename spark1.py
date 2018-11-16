@@ -107,7 +107,7 @@ def main():
             
     print("Median is in the bag %d, with offset %d" % (bag_i, acc))
     # Print the content of the data
-    d = sorted(data_by_keys.mapValues(list).lookup(bag_i))
+    d = sorted(data_by_keys.mapValues(list).lookup(bag_i)[0])
     print(type(d))
     print(d)
 
