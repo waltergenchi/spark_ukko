@@ -60,14 +60,15 @@ def main():
              .map(lambda s: float(s))\
              .map(lambda n: (define_key(n), n))
     count = data.count()
-    
+
     # If the whole dataset is sorted -- it won't ! --, the position of
     # the median should be in the middle
     median_pos = count//2
-
     #groupByKey vs reduceByKey !!
     data_by_keys = data.groupByKey()
+    print(data_by_keys)
     counts_by_tens = data_by_keys.mapValues(len)
+    print(counts_by_tens)
 
     # Detection of in which bag of values is the median
     acc = 0
