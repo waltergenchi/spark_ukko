@@ -21,7 +21,7 @@ def barbaric_median():
              .map(lambda s: float(s))
     count = data.count()
     data=data.collect()
-    # data = sorted(data)
+    data = sorted(data)
     # data = 
     import numpy as np
 
