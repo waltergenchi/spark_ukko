@@ -15,12 +15,12 @@ def mean(m1, m2=None):
         return (m1+m2)*0.5
 
 def barbaric_median():
-    dataset = "data-1-sample.txt"
+    dataset = "data-1.txt"
     conf = (SparkConf()
             .setAppName("genchi")           ##change app name to your username
             .setMaster("spark://128.214.48.227:7077")
             # .setMaster("local")
-            .set("spark.cores.max", "30")  ##dont be too greedy ;)
+            .set("spark.cores.max", "40")  ##dont be too greedy ;)
             .set("spark.rdd.compress", "true")
             .set("spark.broadcast.compress", "true")
            )
