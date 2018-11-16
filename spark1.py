@@ -36,7 +36,9 @@ def barbaric_median():
     # If number even, need to average the two middle numbers
     if count%2==0:
         m1 = data[len(data)//2-1]
+        print(m1)
         m2 = data[len(data)//2]
+        print(m2)
         mean_comp = mean(m1, m2)
     else:
         mean_comp= mean(data[len(data)//2])
