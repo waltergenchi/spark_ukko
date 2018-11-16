@@ -32,7 +32,8 @@ def barbaric_median():
         return (m1+m2)*0.5
 
     print("ACTUAL MEDIAN", np.median(data))
-    if count%2==0:              # If number even, need to average the two middle numbers
+    # If number even, need to average the two middle numbers
+    if count%2==0:
         m1 = data[len(data)//2-1]
         m2 = data[len(data)//2]
         m = mean(m1, m2)
