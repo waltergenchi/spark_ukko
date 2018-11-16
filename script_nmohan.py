@@ -2,7 +2,7 @@ from pyspark import SparkContext, SparkConf
 import os
 import sys
 
-dataset = "data-1-sample.txt" ##change this to your dataset path
+dataset = "data-1.txt" ##change this to your dataset path
 
 conf = (SparkConf()
         .setAppName("genchi")           ##change app name to your username
