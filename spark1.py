@@ -6,10 +6,9 @@ def define_key(number): # TODO : iteration (split /10 every time)
     return number//10
 
 def barbaric_mean():
-    dataset = "./data-1-sample.txt"
-    import config
+    dataset = "data-1-sample.txt"
     conf = (SparkConf()
-            .setAppName(config.username)           ##change app name to your username
+            .setAppName("genchi")           ##change app name to your username
             .setMaster("spark://128.214.48.227:7077")
             # .setMaster("local")
             .set("spark.cores.max", "10")  ##dont be too greedy ;)
@@ -47,9 +46,8 @@ def mean(m1, m2=None):
 def main():
     # Expected answer on data sample : 50.642053915000005
     dataset = "./data-1-sample.txt"
-    import config
     conf = (SparkConf()
-            .setAppName(config.username)           ##change app name to your username
+            .setAppName("genchi")           ##change app name to your username
             .setMaster("spark://128.214.48.227:7077")
             # .setMaster("local")
             .set("spark.cores.max", "10")  ##dont be too greedy ;)
