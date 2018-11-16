@@ -73,7 +73,7 @@ def main():
     data_by_keys = data.groupByKey()
 
     print("*****")
-    print(data_by_keys.take(10))
+    data_by_keys.take(10).mapValues(list)
     print("*****")
 
     #data_by_keys = data.reduceByKey() is it more efficient?
