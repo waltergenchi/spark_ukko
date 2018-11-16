@@ -37,7 +37,7 @@ def barbaric_median():
     if count%2==0:
         m1 = data[len(data)//2-1]
         m2 = data[len(data)//2]
-        m = mean(m1, m2)
+        mean_comp = mean(m1, m2)
     else:
         mean_comp= mean(data[len(data)//2])
 
