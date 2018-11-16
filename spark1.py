@@ -73,7 +73,7 @@ def main():
     acc = 0
     # cbt_tmp = sorted(counts_by_tens.collect())
     cbt_tmp = counts_by_tens.sortByKey().collect()
-    # cbt_tmp è un iteratore, k è key, v è value
+    # cbt_tmp e un iteratore, k e key, v e value
     for k,v in cbt_tmp:
         print(k, acc+v) # print (number of bag, position of the first element of the bag) 
         if (acc+v >= median_pos):
