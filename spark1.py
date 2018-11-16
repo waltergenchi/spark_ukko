@@ -54,7 +54,7 @@ def barbaric_median():
 
 def main():
     # Expected answer on data sample : 50.642053915000005
-    dataset = "data-1-sample.txt"
+    dataset = "data-1.txt"
     conf = (SparkConf()
             .setAppName("genchi")           ##change app name to your username
             .setMaster("spark://128.214.48.227:7077")
