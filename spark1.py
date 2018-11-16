@@ -2,6 +2,8 @@ from pyspark import SparkContext, SparkConf
 import os
 import sys
 
+import numpy as np
+
 def define_key(number): # TODO : iteration (split /10 every time)
     return number//10
 
@@ -79,17 +81,21 @@ def main():
     print("*****")
 
     #data_by_keys = data.reduceByKey() is it more efficient?
-    #counts_by_tens = data_by_keys.mapValues(len)
+    # ottengo qualcosa del tipo [(0,[quanti numeri da 0 a 9.999]) , ... , (10,[quanti numeri da 90 a 100])]
+    counts_by_tens = data_by_keys.mapValues(len)
 
     print("*****")
     #counts_by_tens.take(10).foreach(println)
     print("*****")
 
-    counts_by_tens = data.aggregateByKey()
+    #counts_by_tens = data.aggregateByKey() should be the most efficient!
+
     # Detection of in which bag of values is the median
     acc = 0
     # cbt_tmp = sorted(counts_by_tens.collect())
     # is it less efficient?
+
+    # ordino per chiave
     cbt_tmp = counts_by_tens.sortByKey().collect()
     # cbt_tmp e un iteratore, k e key, v e value
     for k,v in cbt_tmp:
@@ -104,6 +110,7 @@ def main():
     d = data_by_keys.mapValues(list).lookup(bag_i)
     print(type(d))
     print(d)
+    print(np.median(d))
     print("Count = %.8f" % count)
 
 if __name__ == '__main__':
