@@ -88,5 +88,5 @@ def main():
     print("Count = %.8f" % count)
 
 if __name__ == '__main__':
-    barbaric_mean()
+    #barbaric_mean()
     main()
