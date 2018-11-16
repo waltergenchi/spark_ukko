@@ -65,19 +65,19 @@ def main():
     # the median should be in the middle
     median_pos = count//2
     #groupByKey vs reduceByKey !!
-    data_by_keys = data.groupByKey()
-    print(data_by_keys)
+    #data_by_keys = data.groupByKey()
+    data_by_keys = data.reduceByKey()
     counts_by_tens = data_by_keys.mapValues(len)
-    print(counts_by_tens)
 
     # Detection of in which bag of values is the median
     acc = 0
     # cbt_tmp = sorted(counts_by_tens.collect())
     cbt_tmp = counts_by_tens.sortByKey().collect()
+    # cbt_tmp è un iteratore, k è key, v è value
     for k,v in cbt_tmp:
-        print(k, acc+v)
-        if (acc+v>=median_pos):
-            bag_i = k
+        print(k, acc+v) # print (number of bag, position of the first element of the bag) 
+        if (acc+v >= median_pos):
+            bag_i = k #this is the bag which contains the median
             break
         acc += v
             
