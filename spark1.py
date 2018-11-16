@@ -73,7 +73,7 @@ def main():
     data_by_keys = data.groupByKey()
 
     print("*****")
-    data_by_keys.mapValues(list).collect()
+    data.groupByKey().map(lambda x : (x[0], list(x[1]))).collect()
     print("*****")
 
     #data_by_keys = data.reduceByKey() is it more efficient?
