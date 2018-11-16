@@ -64,6 +64,9 @@ def main():
     data = sc.textFile(dataset)\
              .map(lambda s: float(s))\
              .map(lambda n: (define_key(n), n))
+    print("*****")
+    data.collect.foreach(println)
+    print("*****")
     count = data.count()
 
     # If the whole dataset is sorted -- it won't ! --, the position of
