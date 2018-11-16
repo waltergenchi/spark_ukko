@@ -92,9 +92,9 @@ def main():
 
     # Detection of in which bag of values is the median
     acc = 0
+
     # cbt_tmp = sorted(counts_by_tens.collect())
     # is it less efficient?
-
     # ordino per chiave
     cbt_tmp = counts_by_tens.sortByKey().collect()
     # cbt_tmp e un iteratore, k e key, v e value
@@ -107,10 +107,10 @@ def main():
             
     print("Median is in the bag %d, with offset %d" % (bag_i, acc))
     # Print the content of the data
-    d = data_by_keys.mapValues(list).lookup(bag_i)
+    d = sorted(data_by_keys.mapValues(list).lookup(bag_i))
     print(type(d))
     print(d)
-    print(np.median(d))
+
     print("Count = %.8f" % count)
 
 if __name__ == '__main__':
