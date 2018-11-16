@@ -24,6 +24,14 @@ def barbaric_median():
     # data = sorted(data)
     # data = 
     import numpy as np
+    
+    def mean(m1, m2=None):
+    #Mean function. If the number of data is even, the 2 middle elements must be averaged
+        if m2 is None:
+            return m1
+        else:
+            return (m1+m2)*0.5
+
     print("ACTUAL MEDIAN", np.median(data))
     # If number even, need to average the two middle numbers
     if count%2==0:
@@ -34,13 +42,6 @@ def barbaric_median():
         mean = mean(data[len(data)//2])
 
     print("COMPUTED MEDIAN", mean)
-
-    def mean(m1, m2=None):
-    #Mean function. If the number of data is even, the 2 middle elements must be averaged
-        if m2 is None:
-            return m1
-        else:
-            return (m1+m2)*0.5
 
 # def offsetmean(data, offset):
 #     return data.sortByKey().
