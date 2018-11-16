@@ -15,7 +15,7 @@ def mean(m1, m2=None):
         return (m1+m2)*0.5
 
 def barbaric_median():
-    dataset = "data-1-sample.txt"
+    dataset = "data-1.txt"
     conf = (SparkConf()
             .setAppName("genchi")           ##change app name to your username
             .setMaster("spark://128.214.48.227:7077")
@@ -124,5 +124,5 @@ def main():
     print("Count = %.8f" % count)
 
 if __name__ == '__main__':
-    #barbaric_median()
-    main()
+    barbaric_median()
+    #main()
