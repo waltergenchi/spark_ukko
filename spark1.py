@@ -65,13 +65,15 @@ def main():
     # the median should be in the middle
     median_pos = count//2
     #groupByKey vs reduceByKey !!
-    #data_by_keys = data.groupByKey()
-    data_by_keys = data.reduceByKey()
+    data_by_keys = data.groupByKey()
+    #data_by_keys = data.reduceByKey() is it more efficient?
     counts_by_tens = data_by_keys.mapValues(len)
-
+    print("*****")
+    counts_by_tens.collect()
+    print("*****")
     # Detection of in which bag of values is the median
     acc = 0
-    # cbt_tmp = sorted(counts_by_tens.collect())
+    # cbt_tmp = sorted(counts_by_tens.collect()) is it less efficient?
     cbt_tmp = counts_by_tens.sortByKey().collect()
     # cbt_tmp e un iteratore, k e key, v e value
     for k,v in cbt_tmp:
