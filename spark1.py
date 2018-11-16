@@ -111,7 +111,7 @@ def main():
     print(type(d))
     print(d)
     med=d[median_pos-acc]
-    print("The median is")
+    print("The median is" %med)
 
     print("Count = %.8f" % count)
 
