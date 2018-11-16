@@ -110,7 +110,7 @@ def main():
     d = sorted(data_by_keys.mapValues(list).lookup(bag_i)[0])
     print(type(d))
     print(d)
-    med=d[count-acc]
+    med=d[median_pos-acc]
     print("The median is")
 
     print("Count = %.8f" % count)
