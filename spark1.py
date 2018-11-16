@@ -24,7 +24,7 @@ def barbaric_mean():
     # data = sorted(data)
     # data = 
     import numpy as np
-    print("ACTUAL MEAN", np.median(data))
+    print("ACTUAL MEDIAN", np.median(data))
     if count%2==0:              # If number even, need to average the two middle numbers
         m1 = data[len(data)//2-1]
         m2 = data[len(data)//2]
@@ -45,7 +45,7 @@ def mean(m1, m2=None):
         return (m1+m2)*0.5
 def main():
     # Expected answer on data sample : 50.642053915000005
-    dataset = "./data-1-sample.txt"
+    dataset = "data-1-sample.txt"
     conf = (SparkConf()
             .setAppName("genchi")           ##change app name to your username
             .setMaster("spark://128.214.48.227:7077")
@@ -88,5 +88,5 @@ def main():
     print("Count = %.8f" % count)
 
 if __name__ == '__main__':
-    # barbaric_mean()
+    barbaric_mean()
     main()
