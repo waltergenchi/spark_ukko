@@ -73,14 +73,14 @@ def main():
     data_by_keys = data.groupByKey()
 
     print("*****")
-    data_by_keys.take(10).mapValues(list).collect()
+    data_by_keys.mapValues(list).collect()
     print("*****")
 
     #data_by_keys = data.reduceByKey() is it more efficient?
     counts_by_tens = data_by_keys.mapValues(len)
 
     print("*****")
-    counts_by_tens.take(10).foreach(println)
+    #counts_by_tens.take(10).foreach(println)
     print("*****")
 
     # Detection of in which bag of values is the median
