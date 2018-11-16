@@ -7,6 +7,13 @@ import numpy as np
 def define_key(number): # TODO : iteration (split /10 every time)
     return number//10
 
+def mean(m1, m2=None):
+#Mean function. If the number of data is even, the 2 middle elements must be averaged
+    if m2 is None:
+        return m1
+    else:
+        return (m1+m2)*0.5
+
 def barbaric_median():
     dataset = "data-1-sample.txt"
     conf = (SparkConf()
@@ -27,13 +34,6 @@ def barbaric_median():
     # data = 
     import numpy as np
 
-    def mean(m1, m2=None):
-    #Mean function. If the number of data is even, the 2 middle elements must be averaged
-        if m2 is None:
-            return m1
-        else:
-            return (m1+m2)*0.5
-
     print("ACTUAL MEDIAN", np.median(data))
     # If number even, need to average the two middle numbers
     if count%2==0:
@@ -46,6 +46,8 @@ def barbaric_median():
         mean_comp= mean(data[len(data)//2])
 
     print("COMPUTED MEDIAN", mean_comp)
+
+
 
 # def offsetmean(data, offset):
 #     return data.sortByKey().
@@ -111,7 +113,13 @@ def main():
     print(type(d))
     print(d)
     med=d[median_pos-acc]
-    print("The median is %.8f" % med)
+    if count%2==0:
+        m1 = d[median_pos-acc-1]
+        m2 = d[median_pos-acc]
+        med_comp = mean(m1, m2)
+    else:
+        med_comp= mean(d[median_pos-acc])
+    print("The median is %.8f" % med_comp)
 
     print("Count = %.8f" % count)
 
