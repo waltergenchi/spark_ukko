@@ -6,7 +6,7 @@ import numpy as np
 
 # given an input for the number 
 def define_key(number):
-    return number//20
+    return number//100
 
 def mean(m1, m2=None):
 #Mean function. If the number of data is even, the 2 middle elements must be averaged
@@ -66,29 +66,31 @@ def main():
            )
     sc = SparkContext(conf=conf)
 
-    print("Reading values, converting them to floats and assigning them to the bag")
+    print("Reading values, converting them to floats and assigning them to the bag, e.g. 45 -> (4,45)")
     data = sc.textFile(dataset)\
-             .map(lambda s: float(s))\
-             .map(lambda n: (define_key(n), n)) # ogni numero viene mappato al bag, e.g. 45 -> (4,45)
+             .map(lambda n: (float(n)//10, float(n))) # every number is mapped to his bag, e.g. 45 -> (4,45)
 
+    print("Making data persistent across future operations")
+    data.persist()
     print ("Counting data")
     count = data.count()
 
     # If the whole dataset is sorted -- it won't ! --, the position of
     # the median should be in the middle
     median_pos = count//2
+    print("The position of the median is %d" %median_pos)
+    
     #groupByKey vs reduceByKey !!
-
-    print("ottengo qualcosa del tipo [(0,[numeri da 0 a 9.999]) , ... , (10,[numeri da 90 a 100])]")
-    data_by_keys = data.groupByKey()
+    print("Creating the bags, i.e. get something like [(0,[numbers between 0 to 9.999]) , ... , (10,[numbers between 90 and 100])]")
+    bag_by_values = data.groupByKey()
 
     print("*****")
     #print(data_by_keys.keep(10).mapValues(list))
     print("*****")
 
     #data_by_keys = data.reduceByKey() is it more efficient?
-    print("ottengo qualcosa del tipo [(0,[quanti numeri da 0 a 9.999]) , ... , (10,[quanti numeri da 90 a 100])]")
-    counts_by_tens = data_by_keys.mapValues(len)
+    print("Creating the quantity of elements in the bag (ordered by key, i.e. number of bag), get something like [(0,[how many numbers between 0 and 9.999]) , ... , (10,[how many numbers between 90 and 100])]")
+    bag_by_numerosity = data_by_keys.mapValues(len).sortByKey().collect()
 
     print("*****")
     #counts_by_tens.take(10).foreach(println)
@@ -96,38 +98,36 @@ def main():
 
     #counts_by_tens = data.aggregateByKey() should be the most efficient!
 
-    # Detection of in which bag of values is the median
-    acc = 0
+    print("Detect in which bag of values is the median")
 
-    # cbt_tmp = sorted(counts_by_tens.collect())
-    # is it less efficient?
-    print("ordino per chiave")
-    cbt_tmp = counts_by_tens.sortByKey().collect()
+    tmp = 0
+    bag_median = 0
 
-    print("determino in quale bag si trova la mediana")
-    # cbt_tmp e un iteratore, k e key, v e value
-    for k,v in cbt_tmp:
-        print(k, acc+v) # print (number of bag, position of the first element of the bag) 
-        if (acc+v >= median_pos):
-            bag_i = k #this is the bag which contains the median
+    print("Determine in which bag is the median")
+    # cbt_tmp is an iterator, k si the key, v is the value
+    for i in range(10):
+        print("Number of bag: %d, Position of the first element in the bag: %d" %k, %acc+v)
+        if (tmp + bag_by_numerosity[i] >= median_pos):
+            bag_median = i #this is the bag which contains the median
             break
-        acc += v
+        tmp = tmp + bag_by_numerosity[i]
             
-    print("Median is in the bag %d, with offset %d" % (bag_i, acc))
+    print("Median is in the bag %d, with offest %d" % (bag_i, tmp))
+
     # Print the content of the data
     d = sorted(data_by_keys.mapValues(list).lookup(bag_i)[0])
-    print(type(d))
-    #print(d)
-    med=d[median_pos-acc]
-    if count%2==0:
-        m1 = d[median_pos-acc-1]
-        m2 = d[median_pos-acc]
+
+    med=d[median_pos-tmp]
+    if count % 2 == 0:
+        m1 = d[median_pos-tmp-1]
+        m2 = d[median_pos-tmp]
         med_comp = mean(m1, m2)
     else:
         med_comp= mean(d[median_pos-acc])
-    print("The median is %.16f" % med_comp)
 
-    print("Count = %.8f" % count)
+    print("The median is %.16f in position %d" % med_comp, median_pos)
+
+    print("The count is %.8f" % count)
 
 if __name__ == '__main__':
     #barbaric_median()
