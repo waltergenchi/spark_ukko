@@ -124,5 +124,5 @@ def main():
     print("Count = %.8f" % count)
 
 if __name__ == '__main__':
-    barbaric_median()
-    #main()
+    #barbaric_median()
+    main()
