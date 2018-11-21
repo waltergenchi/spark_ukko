@@ -104,7 +104,7 @@ def main():
     print("ordino per chiave")
     cbt_tmp = counts_by_tens.sortByKey().collect()
 
-    print("determino in quale bag è la mediana")
+    print("determino in quale bag si trova la mediana")
     # cbt_tmp e un iteratore, k e key, v e value
     for k,v in cbt_tmp:
         print(k, acc+v) # print (number of bag, position of the first element of the bag) 
