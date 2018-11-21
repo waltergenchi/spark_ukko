@@ -37,7 +37,7 @@ def main():
     # Read matrix from file and split the lines based on space and use float for items
     matrix = raw_matrix_file.map(lambda line: line.split()).map(lambda value: [float(i) for i in value])
 
-    print(len(matrix.count))
+    #print(len(matrix.count))
     Col = matrix.take(1)
 
     nCol = [len(x)for x in Col]
