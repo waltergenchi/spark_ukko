@@ -90,7 +90,7 @@ def main():
 
     #data_by_keys = data.reduceByKey() is it more efficient?
     print("Creating the quantity of elements in the bag (ordered by key, i.e. number of bag), get something like [(0,[how many numbers between 0 and 9.999]) , ... , (10,[how many numbers between 90 and 100])]")
-    bag_by_numerosity = data_by_keys.mapValues(len).sortByKey().collect()
+    bag_by_numerosity = bag_by_values.mapValues(len).sortByKey().collect()
 
     print("*****")
     #counts_by_tens.take(10).foreach(println)
