@@ -51,7 +51,8 @@ def main():
     matrix_chunks = chunks(row_permutation,nCol[0])
 
 # open a file to write the matrix output on local and write in required format
-    filelocation = sys.argv[2]
+    
+    filelocation = 'prova.txt'
 
     t_file = open(filelocation,'w')
     i =1
@@ -62,6 +63,7 @@ def main():
         else:
             t_file.write("%s" % num + " ")
         i = i+1
+
 
 # below lines worte the output in spark format using save as a text file : uncomment if running on cluster
    # matrix_unformated = sc.parallelize(matrix_chunks).coalesce(1)
