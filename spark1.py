@@ -4,7 +4,8 @@ import sys
 
 import numpy as np
 
-def define_key(number): # TODO : iteration (split /10 every time)
+# given an input for the number 
+def define_key(number):
     return number//10
 
 def mean(m1, m2=None):
@@ -54,7 +55,7 @@ def barbaric_median():
 
 def main():
     # Expected answer on data sample : 50.642053915000005
-    dataset = "data-1.txt"
+    dataset = "data-1-sample.txt"
     conf = (SparkConf()
             .setAppName("genchi")           ##change app name to your username
             .setMaster("spark://128.214.48.227:7077")
@@ -65,9 +66,12 @@ def main():
            )
     sc = SparkContext(conf=conf)
 
+    print("Reading values, converting them to floats and assigning them to the bag")
     data = sc.textFile(dataset)\
              .map(lambda s: float(s))\
              .map(lambda n: (define_key(n), n)) # ogni numero viene mappato al bag, e.g. 45 -> (4,45)
+
+    print ("Counting data")
     count = data.count()
 
     # If the whole dataset is sorted -- it won't ! --, the position of
@@ -75,7 +79,7 @@ def main():
     median_pos = count//2
     #groupByKey vs reduceByKey !!
 
-    # ottengo qualcosa del tipo [(0,[numeri da 0 a 9.999]) , ... , (10,[numeri da 90 a 100])]
+    print("ottengo qualcosa del tipo [(0,[numeri da 0 a 9.999]) , ... , (10,[numeri da 90 a 100])]")
     data_by_keys = data.groupByKey()
 
     print("*****")
@@ -83,7 +87,7 @@ def main():
     print("*****")
 
     #data_by_keys = data.reduceByKey() is it more efficient?
-    # ottengo qualcosa del tipo [(0,[quanti numeri da 0 a 9.999]) , ... , (10,[quanti numeri da 90 a 100])]
+    print("ottengo qualcosa del tipo [(0,[quanti numeri da 0 a 9.999]) , ... , (10,[quanti numeri da 90 a 100])]")
     counts_by_tens = data_by_keys.mapValues(len)
 
     print("*****")
@@ -97,8 +101,10 @@ def main():
 
     # cbt_tmp = sorted(counts_by_tens.collect())
     # is it less efficient?
-    # ordino per chiave
+    print("ordino per chiave")
     cbt_tmp = counts_by_tens.sortByKey().collect()
+
+    print("determino in quale bag è la mediana")
     # cbt_tmp e un iteratore, k e key, v e value
     for k,v in cbt_tmp:
         print(k, acc+v) # print (number of bag, position of the first element of the bag) 
