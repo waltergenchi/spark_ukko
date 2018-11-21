@@ -106,7 +106,7 @@ def main():
     print("Determine in which bag is the median")
     # cbt_tmp is an iterator, k si the key, v is the value
     for i in range(10):
-        print("Number of bag: %d, Position of the first element in the bag: %d" %k, %acc+v)
+        print("Number of bag: %d, Position of the first element in the bag: %d" %i, % (tmp+i))
         if (tmp + bag_by_numerosity[i] >= median_pos):
             bag_median = i #this is the bag which contains the median
             break
