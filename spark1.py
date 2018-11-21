@@ -125,7 +125,7 @@ def main():
     else:
         med_comp= mean(d[median_pos-acc])
 
-    print("The median is %.16f in position %d" % med_comp, median_pos)
+    print("The median is %.16f in position %d" % (med_comp, median_pos))
 
     print("The count is %.8f" % count)
 
