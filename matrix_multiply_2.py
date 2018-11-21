@@ -35,7 +35,7 @@ def main():
 
 	sc = SparkContext(conf=conf)
 	
-	row = sc.textFile(dataset).map(lambda row : row.split(' ')).cache()
+	row = sc.textFile(dataset).map(lambda line: line.split()).map(lambda value: [float(i) for i in value]).cache()
 	ncol = len(row.take(1)[0])
 	intermediateResult = row.map(permutation).reduce(add_tuples)
 	
