@@ -6,7 +6,7 @@ import numpy as np
 
 # given an input for the number 
 def define_key(number):
-    return number//10
+    return number//20
 
 def mean(m1, m2=None):
 #Mean function. If the number of data is even, the 2 middle elements must be averaged
