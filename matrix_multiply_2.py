@@ -32,7 +32,8 @@ def main():
             .set("spark.rdd.compress", "true")
             .set("spark.broadcast.compress", "true")
            )
-    sc = SparkContext(conf=conf)
+
+	sc = SparkContext(conf=conf)
 	
 	row = sc.textFile(dataset).map(lambda row : row.split(' ')).cache()
 	ncol = len(row.take(1)[0])
