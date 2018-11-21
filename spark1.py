@@ -115,7 +115,7 @@ def main():
     print("Median is in the bag %d, with offest %d" % (bag_i, tmp))
 
     # Print the content of the data
-    d = sorted(data_by_keys.mapValues(list).lookup(bag_i)[0])
+    d = sorted(bag_by_values.mapValues(list).lookup(bag_i)[0])
 
     med=d[median_pos-tmp]
     if count % 2 == 0:
