@@ -21,7 +21,7 @@ def sum_values(a, b):
     return tuple(sum(x) for x in zip(a,b))
 
 def main():
-    dataset = "data-2-sample.txt"
+    dataset = "stupido.txt"
 
     conf = (SparkConf()
             .setAppName("genchi")           ##change app name to your username
@@ -38,7 +38,7 @@ def main():
     matrix = raw_matrix_file.map(lambda line: line.split()).map(lambda value: [float(i) for i in value])
     print(matrix.collect())
 
-    '''
+    
     #print(len(matrix.count))
     Col = matrix.take(1)
 
@@ -73,7 +73,7 @@ def main():
     #matrix_formated = (matrix_unformated.map(lambda m: ' '.join(map(str, m))))
 
     #matrix_formated.saveAsTextFile(sys.argv[2])
-    '''
+    
 
 if __name__ == "__main__":
     main()
