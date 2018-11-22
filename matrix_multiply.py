@@ -36,7 +36,9 @@ def main():
     raw_matrix_file = sc.textFile(dataset)
     # Read matrix from file and split the lines based on space and use float for items
     matrix = raw_matrix_file.map(lambda line: line.split()).map(lambda value: [float(i) for i in value])
+    print(matrix.lookup(0).collect())
 
+    '''
     #print(len(matrix.count))
     Col = matrix.take(1)
 
@@ -71,7 +73,7 @@ def main():
     #matrix_formated = (matrix_unformated.map(lambda m: ' '.join(map(str, m))))
 
     #matrix_formated.saveAsTextFile(sys.argv[2])
-
+    '''
 
 if __name__ == "__main__":
     main()
