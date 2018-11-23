@@ -5,13 +5,16 @@ import sys
 import numpy as np
 
 def multiply(row):
-
+    return np.dot(row,row)
+    '''
     multiply_row = []
     for i in row:
-        multiply = float(i) *float(i+1)
-        multiply_row.append(multiply)
-        print(multiply_row)
+        for j in row:
+            multiply = float(i) *float(j)
+            multiply_row.append(multiply)
+            print(multiply_row)
     return multiply_row
+    '''
 
 def chunks(l, n):
     n = max(1, n)
@@ -46,9 +49,6 @@ def main():
 # doing purmutation on the row by row for example a b = aa ab ba bb
 
 # doing the sum coloumn by coloumn
-
-    #multiply(matrix.take(3))
-
     row_permutation = matrix.map(lambda row: multiply(row))
     print(row_permutation.collect())
     row_permutation=row_permutation.reduce(sum_values)
