@@ -11,6 +11,7 @@ def multiply(row):
         for j in row:
             multiply = float(i) *float(j)
             multiply_row.append(multiply)
+    print(multiply_row)
     return multiply_row
 
 def chunks(l, n):

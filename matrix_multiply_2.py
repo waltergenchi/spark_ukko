@@ -21,7 +21,7 @@ def permutation(row):
 
 
 def main():
-	dataset = "data-2-sample.txt"
+	dataset = "stupido.txt"
 	output = "prova2.txt"
 
 	conf = (SparkConf()
