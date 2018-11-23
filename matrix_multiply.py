@@ -2,6 +2,7 @@ __author__ = 'pranavgoel'
 
 from pyspark import SparkConf,SparkContext
 import sys
+import numpy as np
 
 def multiply(row):
 
@@ -10,6 +11,7 @@ def multiply(row):
         for j in row:
             multiply = float(i) *float(j)
             multiply_row.append(multiply)
+            print(multiply_row)
     return multiply_row
 
 def chunks(l, n):
@@ -45,6 +47,9 @@ def main():
 # doing purmutation on the row by row for example a b = aa ab ba bb
 
 # doing the sum coloumn by coloumn
+
+    multiply(matrix)
+
     row_permutation = matrix.map(lambda row: multiply(row))
     print(row_permutation.collect())
     row_permutation=row_permutation.reduce(sum_values)
