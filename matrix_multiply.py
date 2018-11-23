@@ -5,7 +5,7 @@ import sys
 import numpy as np
 
 def multiply(row):
-    return np.outer(row,row).reshape(1,4)
+    return np.outer(row,row).reshape(1,nCol)
     '''
     multiply_row = []
     for i in row:
