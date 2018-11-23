@@ -48,7 +48,7 @@ def main():
 
 # doing the sum coloumn by coloumn
     row_permutation = matrix.map(lambda row: multiply(row)).reduce(sum_values)
-
+    print(row_permutation)
 
 
     matrix_chunks = chunks(row_permutation,nCol[0])
