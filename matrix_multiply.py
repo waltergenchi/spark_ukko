@@ -53,8 +53,9 @@ def main():
     print(row_permutation.collect())
     row_permutation=row_permutation.reduce(sum_values)
     print(row_permutation[0])
-    np.reshape(row_permutation[0],(2,2))
-    print(row_permutation[0].shape)
+    a=row_permutation[0]
+    np.reshape(a,(2,2))
+    print(a.shape)
 
     #matrix_chunks = chunks(row_permutation,nCol[0])
 
