@@ -41,7 +41,8 @@ def main():
     raw_matrix_file = sc.textFile(dataset)
     # Read matrix from file and split the lines based on space and use float for items
     matrix = raw_matrix_file.map(lambda line: line.split()).map(lambda value: [float(i) for i in value])
-    print(matrix.collect())
+    #print(matrix.collect())
+    print("read file")
 
     
     #print(len(matrix.count))
@@ -52,11 +53,13 @@ def main():
 
 # doing the sum coloumn by coloumn
     row_permutation = matrix.map(lambda row: multiply(row))
+    print("mapping operation")
     print("**************\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n***********")
     #print(row_permutation.collect())
     row_permutation=row_permutation.reduce(add)
+    print("reduce operation")
     print("**************\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n***********")
-    print(row_permutation)
+    #print(row_permutation)
     print(row_permutation.shape)
     '''
     print(row_permutation[0])
