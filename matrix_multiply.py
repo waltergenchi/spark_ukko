@@ -4,8 +4,8 @@ from pyspark import SparkConf,SparkContext
 import sys
 import numpy as np
 
-def multiply(row):
-    return np.outer(row,row).reshape(1,nCol)
+def multiply(row,ncol):
+    return np.outer(row,row).reshape(1,ncol)
     '''
     multiply_row = []
     for i in row:
@@ -49,7 +49,7 @@ def main():
 # doing purmutation on the row by row for example a b = aa ab ba bb
 
 # doing the sum coloumn by coloumn
-    row_permutation = matrix.map(lambda row: multiply(row))
+    row_permutation = matrix.map(lambda row: multiply(row,nCol))
     print(row_permutation.collect())
     row_permutation=row_permutation.reduce(sum_values)
     print(row_permutation)
