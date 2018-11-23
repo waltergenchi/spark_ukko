@@ -64,6 +64,8 @@ def main():
 
     # need a SQLContext() to generate an IndexedRowMatrix from RDD
     rdd=sc.parallelize(row_permutation)
+    print(type(rdd))
+    print(rdd.collect())
     sqlContext = SQLContext(sc)
     rows = IndexedRowMatrix( \
         rdd \
