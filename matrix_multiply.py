@@ -52,11 +52,10 @@ def main():
 # doing purmutation on the row by row for example a b = aa ab ba bb
 
 # doing the sum coloumn by coloumn
-    row_permutation = matrix.map(lambda row: multiply(row))
+    row_permutation = matrix.map(lambda row: multiply(row)).reduce(add)
     print("mapping operation")
     print("**************\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n***********")
     #print(row_permutation.collect())
-    row_permutation=row_permutation.reduce(add)
     print("reduce operation")
     print("**************\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n***********")
     #print(row_permutation)
