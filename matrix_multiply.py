@@ -8,10 +8,9 @@ def multiply(row):
 
     multiply_row = []
     for i in row:
-        for j in row:
-            multiply = i * j
-            multiply_row.append(multiply)
-            print(multiply_row)
+        multiply = float(i) *float(i+1)
+        multiply_row.append(multiply)
+        print(multiply_row)
     return multiply_row
 
 def chunks(l, n):
@@ -48,7 +47,7 @@ def main():
 
 # doing the sum coloumn by coloumn
 
-    multiply(matrix.take(3))
+    #multiply(matrix.take(3))
 
     row_permutation = matrix.map(lambda row: multiply(row))
     print(row_permutation.collect())
