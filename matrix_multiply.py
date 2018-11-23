@@ -5,7 +5,7 @@ import sys
 import numpy as np
 
 def multiply(row):
-    return np.outer(row,row).reshape(1,1000*2)
+    return np.outer(row,row)
     '''
     multiply_row = []
     for i in row:
@@ -24,7 +24,7 @@ def sum_values(a, b):
     return tuple(sum(x) for x in zip(a,b))
 
 def main():
-    dataset = "data-1-sample.txt"
+    dataset = "prova.txt"
 
     conf = (SparkConf()
             .setAppName("genchi")           ##change app name to your username
@@ -50,8 +50,8 @@ def main():
 
 # doing the sum coloumn by coloumn
     row_permutation = matrix.map(lambda row: multiply(row))
-    #print(row_permutation.collect())
-    row_permutation=row_permutation.reduce(sum_values)
+    print(row_permutation.collect())
+    #row_permutation=row_permutation.reduce(sum_values)
     '''
     print(row_permutation[0])
     a=row_permutation[0]
