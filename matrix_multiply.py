@@ -52,8 +52,8 @@ def main():
 # doing the sum coloumn by coloumn
     row_permutation = matrix.map(lambda row: multiply(row))
     print(row_permutation.collect())
-    row_permutation=row_permutation.reduce(sum_values)
-    print(row_permutation)
+    row_permutation=row_permutation.reduce(add)
+    print(row_permutation.collect())
     '''
     print(row_permutation[0])
     a=row_permutation[0]
