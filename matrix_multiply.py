@@ -3,6 +3,7 @@ __author__ = 'pranavgoel'
 from pyspark import SparkConf,SparkContext
 import sys
 import numpy as np
+from operator import add
 
 def multiply(row):
     return np.outer(row,row)
