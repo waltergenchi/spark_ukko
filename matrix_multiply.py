@@ -24,7 +24,7 @@ def sum_values(a, b):
     return tuple(sum(x) for x in zip(a,b))
 
 def main():
-    dataset = "prova.txt"
+    dataset = "stupido.txt"
 
     conf = (SparkConf()
             .setAppName("genchi")           ##change app name to your username
