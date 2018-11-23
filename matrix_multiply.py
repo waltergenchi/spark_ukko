@@ -53,7 +53,7 @@ def main():
 # doing the sum coloumn by coloumn
     row_permutation = matrix.map(lambda row: multiply(row))
     print("**************\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n***********")
-    print(row_permutation.collect())
+    #print(row_permutation.collect())
     row_permutation=row_permutation.reduce(add)
     print("**************\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n***********")
     print(row_permutation)
