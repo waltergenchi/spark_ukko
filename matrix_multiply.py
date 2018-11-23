@@ -20,8 +20,9 @@ def chunks(l, n):
     n = max(1, n)
     return [l[i:i + n] for i in range(0, len(l), n)]
 
-def sum_values(a, b):
-    return tuple(sum(x) for x in zip(a,b))
+def sum_values(mat):
+    return np.add(mat)
+    #return tuple(sum(x) for x in zip(a,b))
 
 def main():
     dataset = "stupido.txt"
@@ -51,7 +52,8 @@ def main():
 # doing the sum coloumn by coloumn
     row_permutation = matrix.map(lambda row: multiply(row))
     print(row_permutation.collect())
-    #row_permutation=row_permutation.reduce(sum_values)
+    row_permutation=row_permutation.reduce(sum_values)
+    print(row_permutation)
     '''
     print(row_permutation[0])
     a=row_permutation[0]
@@ -61,7 +63,7 @@ def main():
     #matrix_chunks = chunks(row_permutation,nCol[0])
 
 # open a file to write the matrix output on local and write in required format
-    
+    '''
     filelocation = 'prova.txt'
 
     t_file = open(filelocation,'w')
@@ -73,7 +75,7 @@ def main():
         else:
             t_file.write("%s" % num + " ")
         i = i+1
-
+    '''
 
 # below lines worte the output in spark format using save as a text file : uncomment if running on cluster
    # matrix_unformated = sc.parallelize(matrix_chunks).coalesce(1)
