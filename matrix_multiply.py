@@ -53,9 +53,10 @@ def main():
     print(row_permutation.collect())
     row_permutation=row_permutation.reduce(sum_values)
     print(row_permutation)
+    row_permutation.reshape(2,2)
+    print(row_permutation)
 
-
-    matrix_chunks = chunks(row_permutation,nCol[0])
+    #matrix_chunks = chunks(row_permutation,nCol[0])
 
 # open a file to write the matrix output on local and write in required format
     
