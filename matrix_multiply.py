@@ -57,6 +57,7 @@ def main():
     row_permutation=row_permutation.reduce(add)
     print("**************\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n***********")
     print(row_permutation)
+    print(row_permutation.shape)
     '''
     print(row_permutation[0])
     a=row_permutation[0]
