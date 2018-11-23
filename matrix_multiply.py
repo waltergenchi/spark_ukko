@@ -52,8 +52,8 @@ def main():
     row_permutation = matrix.map(lambda row: multiply(row))
     print(row_permutation.collect())
     row_permutation=row_permutation.reduce(sum_values)
-    print(row_permutation)
-    np.array(row_permutation).reshape(2,2)
+    print(row_permutation[0])
+    row_permutation[0].reshape(2,2)
     print(row_permutation)
 
     #matrix_chunks = chunks(row_permutation,nCol[0])
