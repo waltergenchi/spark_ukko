@@ -3,9 +3,6 @@ __author__ = 'pranavgoel'
 from pyspark import SparkConf,SparkContext
 import sys
 
-def printf(x):
-    print(x)
-
 def multiply(row):
 
     multiply_row = []
@@ -13,7 +10,6 @@ def multiply(row):
         for j in row:
             multiply = float(i) *float(j)
             multiply_row.append(multiply)
-            printf(multiply)
     return multiply_row
 
 def chunks(l, n):
@@ -49,7 +45,9 @@ def main():
 # doing purmutation on the row by row for example a b = aa ab ba bb
 
 # doing the sum coloumn by coloumn
-    row_permutation = matrix.map(lambda row: multiply(row)).reduce(sum_values)
+    row_permutation = matrix.map(lambda row: multiply(row))
+    print(row_permutation)
+    row_permutation=row_permutation.reduce(sum_values)
     print(row_permutation)
 
 
