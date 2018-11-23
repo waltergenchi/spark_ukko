@@ -49,7 +49,7 @@ def main():
 # doing purmutation on the row by row for example a b = aa ab ba bb
 
 # doing the sum coloumn by coloumn
-    row_permutation = matrix.map(lambda row: multiply(row,int(nCol)))
+    row_permutation = matrix.map(lambda row: multiply(row,nCol[0]))
     print(row_permutation.collect())
     row_permutation=row_permutation.reduce(sum_values)
     print(row_permutation)
