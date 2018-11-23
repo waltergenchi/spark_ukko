@@ -4,6 +4,7 @@ from pyspark import SparkConf,SparkContext
 import sys
 import numpy as np
 from operator import add
+from pyspark.mllib.linalg.distributed import IndexedRow, IndexedRowMatrix, BlockMatrix
 
 def multiply(row):
     return np.outer(row,row)
@@ -59,6 +60,21 @@ def main():
     row_permutation = row_permutation.reduce(add)
     print(row_permutation)
     print(row_permutation.shape)
+
+    # need a SQLContext() to generate an IndexedRowMatrix from RDD
+    rdd=sc.parallelize(row_permutation)
+    sqlContext = SQLContext(sc)
+    rows = IndexedRowMatrix( \
+        rdd \
+        .map(lambda row: IndexedRow(row[1], row[0])) \
+        ).toBlockMatrix()
+
+    rows_2 = IndexedRowMatrix( \
+        matrix \
+        .map(lambda row: IndexedRow(row[1], row[0])) \
+        ).toBlockMatrix()
+
+    mat_product = rows.multiply(rows_2)
     '''
     print(row_permutation[0])
     a=row_permutation[0]
