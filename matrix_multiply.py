@@ -48,7 +48,7 @@ def main():
 
 # doing the sum coloumn by coloumn
 
-    multiply(matrix)
+    multiply(matrix.take(3))
 
     row_permutation = matrix.map(lambda row: multiply(row))
     print(row_permutation.collect())
