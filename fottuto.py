@@ -7,7 +7,7 @@ import sys
 #datasets path on shared group directory on Ukko2. Uncomment the one which you would like to work on.
 #dataset = "/proj/group/distributed-data-infra/data-1-sample.txt"
 #dataset = "/proj/group/distributed-data-infra/data-1.txt"
-dataset = "data-2-sample.txt"
+dataset = "data-2.txt"
 #dataset = "/proj/group/distributed-data-infra/data-2.txt"
 
 conf = (SparkConf()
