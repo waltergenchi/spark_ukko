@@ -66,7 +66,7 @@ def main():
 
     for i in range(row_permutation.shape[1]):
         ris=matrix.map(lambda line: (i, np.dot(line,row_permutation[:,i])))
-        print(ris) 
+        print(ris.collect()) 
 
     '''
     # need a SQLContext() to generate an IndexedRowMatrix from RDD
