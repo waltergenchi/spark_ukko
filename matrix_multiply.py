@@ -66,12 +66,13 @@ def main():
 
     ris=matrix.map(lambda line: np.dot(line,row_permutation))
     print(ris.collect())
-
+    '''
     def toCSVLine(data):
         return ','.join(str(d) for d in data)
 
     lines = ris.map(toCSVLine)
     lines.saveAsTextFile('pippo.csv')
+    '''
     '''
     for i in range(row_permutation.shape[1]):
         ris=matrix.map(lambda line: (i, np.dot(line,row_permutation[:,i])))
@@ -103,19 +104,19 @@ def main():
     #matrix_chunks = chunks(row_permutation,nCol[0])
 
 # open a file to write the matrix output on local and write in required format
-    '''
-    filelocation = 'prova.txt'
+    
+    filelocation = 'pippo_2.txt'
 
     t_file = open(filelocation,'w')
     i =1
-    for num in row_permutation:
+    for num in ris.collect():
         if(i % nCol[0] == 0):
             t_file.write("%s" % num + "\n")
 
         else:
             t_file.write("%s" % num + " ")
         i = i+1
-    '''
+    
 
 # below lines worte the output in spark format using save as a text file : uncomment if running on cluster
    # matrix_unformated = sc.parallelize(matrix_chunks).coalesce(1)
