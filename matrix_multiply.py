@@ -54,9 +54,9 @@ def main():
 # doing purmutation on the row by row for example a b = aa ab ba bb
 
 # doing the sum coloumn by coloumn
-    #half_matrix = matrix.filter(lambda row: row[0]//2 ==0)
-    #print("*****")
-    #print(len(half_matrix.collect()))
+    matrix, matrix_2 = matrix.randomSplit(weights=[0.5, 0.5], seed=1)
+    print("*****")
+    print(len(matrix.collect()))
     print("**************\n\n\n\n\n\n\n Mapping Operation \n\n\n\n\n\n\n\n\n***********")
     row_permutation = matrix.mapPartition(lambda row: multiply(row))
     #print(row_permutation.collect())
