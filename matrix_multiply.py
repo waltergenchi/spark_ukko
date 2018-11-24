@@ -28,7 +28,7 @@ def sum_values(mat):
     #return tuple(sum(x) for x in zip(a,b))
 
 def main():
-    dataset = "data-2.txt"
+    dataset = "data-2-sample.txt"
 
     conf = (SparkConf()
             .setAppName("genchi")           ##change app name to your username
@@ -54,8 +54,10 @@ def main():
 # doing purmutation on the row by row for example a b = aa ab ba bb
 
 # doing the sum coloumn by coloumn
+    half_matrix = matrix.filter(lambda row: row[0]//2 ==0)
+    half_matrix.collect()
     print("**************\n\n\n\n\n\n\n Mapping Operation \n\n\n\n\n\n\n\n\n***********")
-    row_permutation = matrix.take(50).map(lambda row: multiply(row))
+    row_permutation = matrix.map(lambda row: multiply(row))
     #print(row_permutation.collect())
     print("**************\n\n\n\n\n\n\n Reduce Operation \n\n\n\n\n\n\n\n\n***********")
     row_permutation = row_permutation.reduce(add)
