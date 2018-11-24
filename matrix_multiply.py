@@ -48,9 +48,9 @@ def main():
 
     
     #print(len(matrix.count))
-    Col = matrix.take(1)
+    #Col = matrix.take(1)
 
-    nCol = [len(x)for x in Col]
+    #nCol = [len(x)for x in Col]
 # doing purmutation on the row by row for example a b = aa ab ba bb
 
 # doing the sum coloumn by coloumn
