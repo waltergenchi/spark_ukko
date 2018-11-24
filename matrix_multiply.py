@@ -62,7 +62,7 @@ def main():
     print(row_permutation)
     print(row_permutation.shape)
     print(type(row_permutation))
-    print(row_permutation[,0])
+    print(row_permutation[:,0])
 
     '''
     # need a SQLContext() to generate an IndexedRowMatrix from RDD
