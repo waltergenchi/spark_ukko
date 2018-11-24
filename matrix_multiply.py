@@ -61,8 +61,9 @@ def main():
     row_permutation = row_permutation.reduce(add)
     print(row_permutation)
     print(row_permutation.shape)
+    print(type(row_permutation))
+    print(row_permutation[,0])
 
-    
     '''
     # need a SQLContext() to generate an IndexedRowMatrix from RDD
     rdd=sc.parallelize(row_permutation)
