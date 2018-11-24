@@ -66,6 +66,12 @@ def main():
 
     ris=matrix.map(lambda line: np.dot(line,row_permutation))
     print(ris.collect())
+
+    def toCSVLine(data):
+        return ','.join(str(d) for d in data)
+
+    lines = ris.map(toCSVLine)
+    lines.saveAsTextFile('pippo.txt')
     '''
     for i in range(row_permutation.shape[1]):
         ris=matrix.map(lambda line: (i, np.dot(line,row_permutation[:,i])))
