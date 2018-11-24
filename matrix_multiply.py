@@ -62,22 +62,23 @@ def main():
     print(row_permutation)
     print(row_permutation.shape)
 
+    
+    '''
     # need a SQLContext() to generate an IndexedRowMatrix from RDD
     rdd=sc.parallelize(row_permutation)
     print(type(rdd))
     print(rdd.collect())
     sqlContext = SQLContext(sc)
-    rows = IndexedRowMatrix( \
-        rdd \
-        .map(lambda row: IndexedRow(row[1], row[0])) \
-        ).toBlockMatrix()
-
+    rows = IndexedRowMatrix(rdd).toBlockMatrix()
+    Xirm.rows.map(lambda x: (lu[x.index], *x.vector.toArray().tolist()))
+    
     rows_2 = IndexedRowMatrix( \
         matrix \
         .map(lambda row: IndexedRow(row[1], row[0])) \
         ).toBlockMatrix()
 
     mat_product = rows.multiply(rows_2)
+    '''
     '''
     print(row_permutation[0])
     a=row_permutation[0]
