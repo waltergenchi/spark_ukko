@@ -34,7 +34,7 @@ def main():
             .setAppName("genchi")           ##change app name to your username
             .setMaster("spark://128.214.48.227:7077")
             # .setMaster("local")
-            .set("spark.cores.max", "20")  ##dont be too greedy ;)
+            .set("spark.cores.max", "10")  ##dont be too greedy ;)
             .set("spark.rdd.compress", "true")
             .set("spark.broadcast.compress", "true")
            )
