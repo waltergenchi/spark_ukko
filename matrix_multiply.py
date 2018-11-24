@@ -55,7 +55,7 @@ def main():
 
 # doing the sum coloumn by coloumn
     half_matrix = matrix.filter(lambda row: row[0]//2 ==0)
-    half_matrix.collect()
+    print(len(half_matrix.collect()))
     print("**************\n\n\n\n\n\n\n Mapping Operation \n\n\n\n\n\n\n\n\n***********")
     row_permutation = matrix.map(lambda row: multiply(row))
     #print(row_permutation.collect())
