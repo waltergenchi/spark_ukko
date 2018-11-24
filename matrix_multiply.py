@@ -42,7 +42,7 @@ def main():
 
     raw_matrix_file = sc.textFile(dataset)
     # Read matrix from file and split the lines based on space and use float for items
-    matrix = raw_matrix_file.map(lambda line: line.split()).map(lambda value: [float(i) for i in value]).cache()
+    matrix = raw_matrix_file.map(lambda line: line.split()).map(lambda value: [float(i) for i in value]).persistent()
     #print(matrix.collect())
     print("read file")
 
@@ -54,9 +54,6 @@ def main():
 # doing purmutation on the row by row for example a b = aa ab ba bb
 
 # doing the sum coloumn by coloumn
-    matrix, matrix_2 = matrix.randomSplit(weights=[0.5, 0.5], seed=1)
-    print("*****")
-    #print(len(matrix.collect()))
     print("**************\n\n\n\n\n\n\n Mapping Operation \n\n\n\n\n\n\n\n\n***********")
     row_permutation = matrix.map(lambda row: multiply(row))
     #print(row_permutation.collect())
