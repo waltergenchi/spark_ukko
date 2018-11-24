@@ -28,13 +28,13 @@ def sum_values(mat):
     #return tuple(sum(x) for x in zip(a,b))
 
 def main():
-    dataset = "data-2-sample.txt"
+    dataset = "data-2.txt"
 
     conf = (SparkConf()
             .setAppName("genchi")           ##change app name to your username
             .setMaster("spark://128.214.48.227:7077")
             # .setMaster("local")
-            .set("spark.cores.max", "10")  ##dont be too greedy ;)
+            .set("spark.cores.max", "40")  ##dont be too greedy ;)
             .set("spark.rdd.compress", "true")
             .set("spark.broadcast.compress", "true")
            )
