@@ -64,7 +64,7 @@ def main():
     print(type(row_permutation))
     print(row_permutation[:,0])
 
-    ris=matrix.map(lambda line: np.dot(line,row_permutation))
+    ris=matrix.map(lambda line: str(list(np.dot(line,row_permutation))))
     print(ris.collect())
     '''
     def toCSVLine(data):
