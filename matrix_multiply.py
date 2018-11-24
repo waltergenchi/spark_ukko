@@ -28,7 +28,7 @@ def sum_values(mat):
     #return tuple(sum(x) for x in zip(a,b))
 
 def main():
-    dataset = "stupido.txt"
+    dataset = "data-2-sample.txt"
 
     conf = (SparkConf()
             .setAppName("genchi")           ##change app name to your username
@@ -43,7 +43,7 @@ def main():
     raw_matrix_file = sc.textFile(dataset)
     # Read matrix from file and split the lines based on space and use float for items
     matrix = raw_matrix_file.map(lambda line: line.split()).map(lambda value: [float(i) for i in value])
-    print(matrix.collect())
+    #print(matrix.collect())
     print("read file")
 
     
@@ -56,23 +56,23 @@ def main():
 # doing the sum coloumn by coloumn
     print("**************\n\n\n\n\n\n\n Mapping Operation \n\n\n\n\n\n\n\n\n***********")
     row_permutation = matrix.map(lambda row: multiply(row))
-    print(row_permutation.collect())
+    #print(row_permutation.collect())
     print("**************\n\n\n\n\n\n\n Reduce Operation \n\n\n\n\n\n\n\n\n***********")
     row_permutation = row_permutation.reduce(add)
-    print(row_permutation)
+    #print(row_permutation)
     print(row_permutation.shape)
     print(type(row_permutation))
-    print(row_permutation[:,0])
+    #print(row_permutation[:,0])
 
     ris=matrix.map(lambda line: list(np.dot(line,row_permutation)))
-    print(ris.collect())
-    
+    #print(ris.collect())
+    '''
     def toCSVLine(data):
         return ','.join(str(d) for d in data)
 
     lines = ris.map(toCSVLine)
     lines.saveAsTextFile('pippo.csv')
-    
+    '''
     '''
     for i in range(row_permutation.shape[1]):
         ris=matrix.map(lambda line: (i, np.dot(line,row_permutation[:,i])))
@@ -104,7 +104,7 @@ def main():
     #matrix_chunks = chunks(row_permutation,nCol[0])
 
 # open a file to write the matrix output on local and write in required format
-    
+    '''
     filelocation = 'pippo_2.txt'
 
     t_file = open(filelocation,'w')
@@ -116,7 +116,7 @@ def main():
         else:
             t_file.write("%s" % num + " ")
         i = i+1
-    
+    '''
 
 # below lines worte the output in spark format using save as a text file : uncomment if running on cluster
    # matrix_unformated = sc.parallelize(matrix_chunks).coalesce(1)
