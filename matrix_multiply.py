@@ -56,9 +56,9 @@ def main():
 # doing the sum coloumn by coloumn
     matrix, matrix_2 = matrix.randomSplit(weights=[0.5, 0.5], seed=1)
     print("*****")
-    print(len(matrix.collect()))
+    #print(len(matrix.collect()))
     print("**************\n\n\n\n\n\n\n Mapping Operation \n\n\n\n\n\n\n\n\n***********")
-    row_permutation = matrix.mapPartition(lambda row: multiply(row))
+    row_permutation = matrix.map(lambda row: multiply(row))
     #print(row_permutation.collect())
     print("**************\n\n\n\n\n\n\n Reduce Operation \n\n\n\n\n\n\n\n\n***********")
     row_permutation = row_permutation.reduce(add)
