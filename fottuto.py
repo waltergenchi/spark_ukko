@@ -35,16 +35,21 @@ data = sc.textFile(dataset)
 #	.zipWithIndex().map(lambda (value, index): (index // 1000, (index - (index // 1000) * 1000, value)))
 
 #data_product = data_first_product.join(data_right).map(lambda (j, ((i, value1), (k, value2))): ((i, k), value1 * value2)).reduceByKey(add).sortByKey()
+print("pippo")
 data_left = data.flatMap(lambda line: [float(x) for x in line.split()]) \
         .zipWithIndex().map(lambda (value, index): (index // 1000, [value])).reduceByKey(add)
+print("marketa")
 
 data_center = data_left
 
 data_right = data.flatMap(lambda line: [float(x) for x in line.split()]) \
         .zipWithIndex().map(lambda (value, index): (index - (index // 1000) * 1000, [value])).reduceByKey(add)
+print("neandertal")
 
 data_first_product = data_left.join(data_center).map(lambda (index, (value1, value2) ) : (index, ([a * b for a, b in zip(value1, value2)]))).reduceByKey(add)
+print("blanca")
 data_product = data_first_product.join(data_right).map(lambda (index, (value1, value2) ) : (index, ([a * b for a,b in zip(value1, value2)]))).reduceByKey(add).sortByKey()
+print("katerina")
 
 ii = 0
 for i in data_product.collect():
