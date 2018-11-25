@@ -66,15 +66,15 @@ def main():
     print("Count = %d\n" %count)
 
     print("Computing Minimum\n")
-    min = data.min() # useful for normalization
-    print("Minimum = %d\n" %min)
+    min_v = data.min() # useful for normalization
+    print("Minimum = %d\n" %min_v)
 
     print("Computing Maximum\n")
-    max = data.max() # useful for normalization
-    print("Maximum = %d\n" %max)
+    max_v = data.max() # useful for normalization
+    print("Maximum = %d\n" %max_v)
 
     print("Every number n is mapped to his bag using:\n 1) Normalization, i.e. x=(n-min)/(max-min)\n 2) Assigned Bag = x//(1/n_of_bags)\n 3) FINAL RESULT: n -> (Assigned Bag,n)")
-    data=data.map(lambda n: ( int((n-min)/(max-min)*10 , n ) ) )
+    data=data.map(lambda n: ( int((( n- min_v)/(max_v-min_v))*10 , n ) ) )
 
     median_pos = count//2
     print("The position of the median is %d" %median_pos)
