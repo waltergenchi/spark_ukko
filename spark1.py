@@ -114,6 +114,10 @@ def main():
         med_comp= d[median_pos-acc]
 
     print("The median is %.16f in position %d\n" % (med_comp, median_pos))
+    # save median value (16-float) to file
+    file = open("output1_genchi.txt","w")
+    file.write(med_comp)
+
 
 if __name__ == '__main__':
     #naive_median()
