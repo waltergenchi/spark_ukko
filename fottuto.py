@@ -41,7 +41,7 @@ data_left = data.flatMap(lambda line: [float(x) for x in line.split()]) \
 print("marketa")
 
 data_center = data_left
-
+#
 data_right = data.flatMap(lambda line: [float(x) for x in line.split()]) \
         .zipWithIndex().map(lambda (value, index): (index - (index // 1000) * 1000, [value])).reduceByKey(add)
 print("neandertal")
