@@ -28,7 +28,7 @@ def sum_values(mat):
     #return tuple(sum(x) for x in zip(a,b))
 
 def main():
-    dataset = "data-2-sample.txt"
+    dataset = "data-2.txt"
 
     conf = (SparkConf()
             .setAppName("genchi")           ##change app name to your username
