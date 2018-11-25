@@ -4,24 +4,13 @@ import sys
 
 import numpy as np
 
-# given an input for the number 
-def define_key(number):
-    return number//100
-
-def mean(m1, m2=None):
-#Mean function. If the number of data is even, the 2 middle elements must be averaged
-    if m2 is None:
-        return m1
-    else:
-        return (m1+m2)*0.5
-
-def barbaric_median():
-    dataset = "data-1.txt"
+def naive_median():
+    dataset = "data-1-sample.txt"
     conf = (SparkConf()
             .setAppName("genchi")           ##change app name to your username
             .setMaster("spark://128.214.48.227:7077")
             # .setMaster("local")
-            .set("spark.cores.max", "40")  ##dont be too greedy ;)
+            .set("spark.cores.max", "10")  ##dont be too greedy ;)
             .set("spark.rdd.compress", "true")
             .set("spark.broadcast.compress", "true")
            )
@@ -35,27 +24,25 @@ def barbaric_median():
     # data = 
     import numpy as np
 
-    print("ACTUAL MEDIAN", np.median(data))
-    # If number even, need to average the two middle numbers
+    print("NUMPY MEDIAN", np.median(data))
+
+    # If count is an even number, we need to average the two middle numbers
     if count%2==0:
         m1 = data[len(data)//2-1]
         print(m1)
         m2 = data[len(data)//2]
         print(m2)
-        mean_comp = mean(m1, m2)
+        mean_comp = (m1+m2)/2
     else:
-        mean_comp= mean(data[len(data)//2])
+        mean_comp= data[len(data)//2]
 
-    print("COMPUTED MEDIAN", mean_comp)
-
-
-
-# def offsetmean(data, offset):
-#     return data.sortByKey().
+    print("COMPUTED MEDIAN WITH SORTING OPERATION", mean_comp)
 
 def main():
-    # Expected answer on data sample : 50.642053915000005
+    # Expected median on data sample : 50.642053915000005 (computed with naive_median function)
     dataset = "data-1-sample.txt"
+    n_of_bags = 10
+
     conf = (SparkConf()
             .setAppName("genchi")           ##change app name to your username
             .setMaster("spark://128.214.48.227:7077")
@@ -66,45 +53,38 @@ def main():
            )
     sc = SparkContext(conf=conf)
 
-    print("Reading values, converting them to floats and assigning them to the bag, e.g. 45 -> (4,45)")
+    print("Reading values and converting them to floats\n")
+    #and assigning them to the bag, e.g. 45 -> (4,45)")
     data = sc.textFile(dataset)\
-             .map(lambda n: (float(n)//10, float(n))) # every number is mapped to his bag, e.g. 45 -> (4,45)
+             .map(lambda n: float(n)) # every number is mapped to his bag, e.g. 45 -> (4,45)
 
-    print("Making data persistent across future operations")
+    print("Making data persistent across future operations\n")
     data.persist()
-    print ("Counting data")
-    count = data.count()
+    print ("Counting data, Computing Maximum and Minimum\n")
+    count = data.count() #useful for computing the position of the median later
+    min = data.min() # useful for normalization
+    max = data.max() # useful for normalization
 
-    # If the whole dataset is sorted -- it won't ! --, the position of
-    # the median should be in the middle
+    print("Every number n is mapped to his bag using:\n 1) Normalization, i.e. x=(n-min)/(max-min)\n 2) Assigned Bag = x//(1/n_of_bags)\n 3) FINAL RESULT: n -> (Assigned Bag,n)")
+    data=data.map(lambda n: ( ((n-min)/(max-min))//(1/n_of_bags), n) )
+
     median_pos = count//2
     print("The position of the median is %d" %median_pos)
-    
-    #groupByKey vs reduceByKey !!
-    print("Creating the bags, i.e. get something like [(0,[numbers between 0 to 9.999]) , ... , (10,[numbers between 90 and 100])]")
+
+    print("\n\n\n ***** reduceByKey ***** \n\n\n ")
+    print("Creating the bags, i.e. get something like\n[(0,[numbers between 0 and 0.0999]) , ... , (10,[numbers between 0.9 and 1])]")
     bag_by_values = data.groupByKey()
 
-    print("*****")
-    #print(data_by_keys.keep(10).mapValues(list))
-    print("*****")
-
     #data_by_keys = data.reduceByKey() is it more efficient?
-    print("Creating the quantity of elements in the bag (ordered by key, i.e. number of bag), get something like [(0,[how many numbers between 0 and 9.999]) , ... , (10,[how many numbers between 90 and 100])]")
+    print("\n\n\n ***** mapValues ***** \n\n\n ")
+    print("Creating the quantity of elements in the bag (ordered by key, i.e. number of bag), get something like\n[(0,[how many numbers between 0 and 0.0999]) , ... , (10,[how many numbers between 0.9 and 1])]")
     bag_by_numerosity = bag_by_values.mapValues(len).sortByKey().values().collect()
 
-    print("*****")
-    #counts_by_tens.take(10).foreach(println)
-    print("*****")
 
-    #counts_by_tens = data.aggregateByKey() should be the most efficient!
-
-    print("Detect in which bag of values is the median")
-
+    print("Determine in which bag is the median\n")
     tmp = 0
     bag_median = 0
 
-    print("Determine in which bag is the median")
-    # cbt_tmp is an iterator, k si the key, v is the value
     for i in range(10):
         print("Number of bag: %d, Position of the first element in the bag: %d" % (i,tmp+i))
         if (tmp + bag_by_numerosity[i] >= median_pos):
@@ -112,23 +92,21 @@ def main():
             break
         tmp = tmp + bag_by_numerosity[i]
             
-    print("Median is in the bag %d, with offest %d" % (bag_median, tmp))
+    print("\nMedian is in the bag %d, with offest %d\n" % (bag_median, tmp))
 
-    # Print the content of the data
+    print("Sorting the bag where the median is contained\n")
     d = sorted(bag_by_values.mapValues(list).lookup(bag_median)[0])
 
     med=d[median_pos-tmp]
     if count % 2 == 0:
         m1 = d[median_pos-tmp-1]
         m2 = d[median_pos-tmp]
-        med_comp = mean(m1, m2)
+        med_comp = (m1+m2)/2
     else:
-        med_comp= mean(d[median_pos-acc])
+        med_comp= d[median_pos-acc]
 
-    print("The median is %.16f in position %d" % (med_comp, median_pos))
-
-    print("The count is %.8f" % count)
+    print("The median is %.16f in position %d\n" % (med_comp, median_pos))
 
 if __name__ == '__main__':
-    #barbaric_median()
+    #naive_median()
     main()
