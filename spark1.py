@@ -74,7 +74,7 @@ def main():
     print("Maximum = %d\n" %max_v)
 
     print("Every number n is mapped to his bag using:\n 1) Normalization, i.e. x=(n-min)/(max-min)\n 2) Assigned Bag = x//(1/n_of_bags)\n 3) FINAL RESULT: n -> (Assigned Bag,n)")
-    data=data.map(lambda n: ( int((( n- min_v)/(max_v-min_v))*10 , n ) ) )
+    data=data.map(lambda n: ( int(( ( n- min_v) / (max_v-min_v) ) *10) , n ))
 
     median_pos = count//2
     print("The position of the median is %d" %median_pos)
