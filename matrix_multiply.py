@@ -5,7 +5,7 @@ from pyspark.sql import SQLContext
 import sys
 import numpy as np
 from operator import add
-from pyspark.mllib.linalg.distributed import IndexedRow, IndexedRowMatrix, BlockMatrix
+#from pyspark.mllib.linalg.distributed import IndexedRow, IndexedRowMatrix, BlockMatrix
 
 def multiply(row):
     return np.outer(row,row)
