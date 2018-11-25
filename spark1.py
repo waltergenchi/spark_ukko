@@ -85,7 +85,7 @@ def main():
 
     #data_by_keys = data.reduceByKey() is it more efficient?
     print("\n\n\n ***** mapValues ***** \n\n\n ")
-    print("Creating the quantity of elements in the bag (ordered by key, i.e. number of bag), get something like\n[(0,[how many numbers between 0 and 0.0999]) , ... , (10,[how many numbers between 0.9 and 1])]")
+    print("Creating the bag size (ordered by key, i.e. number of bag), get something like\n[(0,[how many numbers between 0 and 0.0999]) , ... , (10,[how many numbers between 0.9 and 1])]")
     bag_by_numerosity = bag_by_values.mapValues(len).sortByKey().values().collect()
 
 
