@@ -18,21 +18,29 @@ conf = (SparkConf()
 sc = SparkContext(conf=conf)
 
 data = sc.textFile(dataset)
+print("pippo")
 
 # matrix A is data_left, each element is of form: (i, j, value) => (j, (i, value))
 data_left = data.flatMap(lambda line: [float(x) for x in line.split()]) \
 	.zipWithIndex().map(lambda (value, index): (index - (index // 1000) * 1000, (index // 1000, value))) 
 
+print("marketa")
+
 # the data left matrix is joined with itself in order to do the multiplication A * A_transpose
 # each element of the matrix A has the following form: (j, k, value) => (j, (k, value));
 # for A_transpose the lines becomes columns so we need to map it as: (j, k, value) transpose => (k, j, value) => (j, (k, value)) 
 data_left  = data_left.join(data_left).map(lambda (j, ((i, value1), (k, value2))): ((i, k), value1 * value2)).reduceByKey(add).map(lambda ((i, k), v): (k, (i, v)))
+print("blanca")
 
 # data_right is the second A matrix from A * A_transpose * A
 data_right = data.flatMap(lambda line: [float(x) for x in line.split()]) \
 	.zipWithIndex().map(lambda (value, index): (index // 1000, (index - (index // 1000) * 1000, value)))
 
+print("katerina")
+
 data_product = data_left.join(data_right).map(lambda (j, ((i, value1), (k, value2))): ((i, k), value1 * value2)).reduceByKey(add).sortByKey()
+
+print("neandertal")
  
 st = ""
 with open("cacca.txt", "w") as f:
