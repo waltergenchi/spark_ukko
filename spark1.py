@@ -60,9 +60,11 @@ def main():
 
     print("Making data persistent across future operations\n")
     data.persist()
-    print ("Counting data, Computing Maximum and Minimum\n")
+    print ("Counting data\n")
     count = data.count() #useful for computing the position of the median later
+    print("Computing Minimum\n")
     min = data.min() # useful for normalization
+    print("Computing Maximum\n")
     max = data.max() # useful for normalization
 
     print("Every number n is mapped to his bag using:\n 1) Normalization, i.e. x=(n-min)/(max-min)\n 2) Assigned Bag = x//(1/n_of_bags)\n 3) FINAL RESULT: n -> (Assigned Bag,n)")
