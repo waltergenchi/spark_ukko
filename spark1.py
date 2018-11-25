@@ -40,7 +40,7 @@ def naive_median():
 
 def main():
     # Expected median on data sample : 50.642053915000005 (computed with naive_median function)
-    dataset = "data-1-sample.txt"
+    dataset = "data-1.txt"
     n_of_bags = 10
 
     conf = (SparkConf()
@@ -116,7 +116,7 @@ def main():
     print("The median is %.16f in position %d\n" % (med_comp, median_pos))
     # save median value (16-float) to file
     file = open("output1_genchi.txt","w")
-    file.write(med_comp)
+    file.write(str(med_comp))
 
 
 if __name__ == '__main__':
