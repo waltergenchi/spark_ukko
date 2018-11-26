@@ -8,7 +8,7 @@ import time
 
 starttime = time.time() #getting time for measurements
 
-dataset = "data-2-sample.txt" ##change this to your dataset path
+dataset = "data-2.txt" ##change this to your dataset path
 output = "pippo_provissima.txt"
 
 conf = (SparkConf()
