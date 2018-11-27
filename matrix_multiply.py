@@ -81,7 +81,7 @@ def main():
     print("\n ** Mapping Operation ** \n")
     start_map2 = time.time()
     temp=Atranspose_A.collect()
-    A_Atranspose_A=matrix.map(lambda line: list(np.dot(line,temp))
+    A_Atranspose_A=matrix.map(lambda line: list(np.dot(line,temp)))
     end_map2 = time.time()
     takenTime_map2 = end_map2-start_map2
     print("    TAKEN TIME by MAPPING TRANSFORMATION: %f" %takenTime_map2)
