@@ -29,7 +29,7 @@ def main():
     print("\n\nReading file and converting numbers in float for each line")
     matrix = data_file.map(lambda line: line.split()).map(lambda value: [float(i) for i in value])
     
-
+    '''
     print("\n\n**** Matrix A ****")
     print("Computing the number of rows of A\n")
     nRows=matrix.count()
@@ -39,7 +39,7 @@ def main():
     Col = matrix.take(1)
     nCols = [len(x)for x in Col]
     print("NUMBER OF COLUMNS of A: %d\n" % nCols[0] )
-
+    '''
 
 
 
@@ -47,7 +47,7 @@ def main():
 
     print("\n ** Mapping Operation ** \n")
     start_map1 = time.time()
-    Atranspose_A = matrix.map(lambda row: multiply(row)).zipwithIndex().map(lambda (vals,index): (index//2,vals)) # very small amount of time
+    Atranspose_A = matrix.map(lambda row: multiply(row)).zipWithIndex().map(lambda (vals,index): (index//2,vals)) # very small amount of time
     end_map1 = time.time()
     takenTime_map1 = end_map1-start_map1
     print("    TAKEN TIME by MAPPING TRANSFORMATION: %f" %takenTime_map1)
