@@ -90,6 +90,7 @@ def main():
     print("FINAL NUMBER OF COLUMNS : %d" %nCol[0])
 
     print("The type of A * A_transpose * A is %s\n\n" %type(Atranspose_A))
+    print(A_Atranspose_A.collect())
 
     # saving file as:
     # A_Atranspose_A=A_Atranspose_A.map(lambda line: str(row[1]))
