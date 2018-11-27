@@ -69,7 +69,7 @@ def main():
 
     print("Computing the number of columns of A * A_transpose * A\n")
     Col = A_Atranspose_A.take(1)
-    nCols = [len(x)for x in Col]
+    nCol = [len(x)for x in Col]
     print("Number of columns of A * A_transpose * A: %d\n" %nCol[0])
 
     #print(len(ris.collect()))
