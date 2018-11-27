@@ -56,7 +56,7 @@ def main():
     start_reduce1 = time.time()
     Atranspose_A = Atranspose_A.reduceByKey(add)
     print("*****\n\n\n")
-    print(A_Atranspose_A.collect())
+    print(Atranspose_A.collect())
     Atranspose_A = Atranspose_A.reduce(add)
     end_reduce1 = time.time()
     takenTime_reduce1 = end_reduce1-start_reduce1
