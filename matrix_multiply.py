@@ -17,16 +17,12 @@ def multiply(row):
     return multiply_row
     '''
 
-def chunks(l, n):
-    n = max(1, n)
-    return [l[i:i + n] for i in range(0, len(l), n)]
-
 def sum_values(mat):
     return np.add(mat)
     #return tuple(sum(x) for x in zip(a,b))
 
 def main():
-    dataset = "data-2.txt"
+    dataset = "data-2-sample.txt"
 
     conf = (SparkConf()
             .setAppName("genchi")           ##change app name to your username
@@ -45,15 +41,15 @@ def main():
     
     #print(matrix.collect())
 
-    print("Computing the number of rows\n")
+    print("Computing the number of rows of A\n")
     nRows=matrix.count()
-    print("Number of rows: %d\n",nRows)
+    print("Number of rows of A: %d\n",nRows)
 
 
-    print("Computing the number of columns\n")
+    print("Computing the number of columns of A\n")
     Col = matrix.take(1)
     nCols = [len(x)for x in Col]
-    print("Number of columns: %d\n",nCol[0])
+    print("Number of columns of A: %d\n",nCol[0])
 
     print("\n\n\n ***** Mapping Operation ***** \n\n\n")
     Atranspose_A = matrix.map(lambda row: multiply(row))
@@ -66,17 +62,17 @@ def main():
 
     A_Atranspose_A=matrix.map(lambda line: list(np.dot(line,row_permutation)))
 
-    print("Computing the number of rows\n")
-    nRows=matrix.count()
+    print("Computing the number of rows of A * A_transpose * A\n")
+    nRows=A_Atranspose_A.count()
     print("Number of rows: %d\n",nRows)
 
 
-    print("Computing the number of columns\n")
-    Col = matrix.take(1)
+    print("Computing the number of columns of A * A_transpose * A\n")
+    Col = A_Atranspose_A.take(1)
     nCols = [len(x)for x in Col]
-    print("Number of columns: %d\n",nCol[0])
+    print("Number of columns of A * A_transpose * A: %d\n",nCol[0])
 
-    print(len(ris.collect()))
+    #print(len(ris.collect()))
     #print(ris.collect())
     '''
     def toCSVLine(data):
