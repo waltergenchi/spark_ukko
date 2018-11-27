@@ -57,14 +57,14 @@ def main():
     Atranspose_A = matrix.map(lambda row: multiply(row))
     end_map1 = time.time()
     takenTime_map1 = end_map1-start_map1
-    print("TAKEN TIME by MAPPING TRANSFORMATION: %f"takenTime_map1)
+    print("TAKEN TIME by MAPPING TRANSFORMATION: %f" %takenTime_map1)
     #print(row_permutation.collect())
     print("\n\n\n ***** Reduce Operation ***** \n\n\n")
     start_reduce1 = time.time()
     Atranspose_A = Atranspose_A.reduce(add)
     end_reduce1 = time.time()
     takenTime_reduce1 = end_reduce1-start_reduce1
-    print("TAKEN TIME by REDUCE ACTION: %f\n"takenTime_reduce1)
+    print("TAKEN TIME by REDUCE ACTION: %f\n" %takenTime_reduce1)
 
     print("**** A_transpose * A ****\n")
     print("The SHAPE of A_transpose * A is (%d,%d)\n" %(Atranspose_A.shape[0],Atranspose_A.shape[1]))
@@ -74,7 +74,7 @@ def main():
     A_Atranspose_A=matrix.map(lambda line: list(np.dot(line,Atranspose_A)))
     end_map2 = time.time()
     takenTime_map2 = end_map2-start_map2
-    print("TAKEN TIME by MAPPING TRANSFORMATION: %f"takenTime_map2)
+    print("TAKEN TIME by MAPPING TRANSFORMATION: %f" %takenTime_map2)
 
     print("\n\n\n**** A* A_transpose * A ****\n")
     print("Computing the number of rows of A * A_transpose * A\n")
@@ -82,7 +82,7 @@ def main():
     nRows=A_Atranspose_A.count()
     end_count = time.time()
     takenTime_count = end_count-start_count
-    print("TAKEN TIME by COUNT ACTION: %f\n"takenTime_count)
+    print("TAKEN TIME by COUNT ACTION: %f\n" %takenTime_count)
     print("NUMBER OF ROWS: %d\n" %nRows)
 
 
