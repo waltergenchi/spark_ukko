@@ -57,7 +57,7 @@ def main():
     print("\n\n\n ***** Reduce Operation ***** \n\n\n")
     Atranspose_A = Atranspose_A.reduce(add)
 
-    print("The shape of A_transpose * A is %f\n" %Atranspose_A.shape)
+    print("The shape of A_transpose * A is %s\n" %Atranspose_A.shape)
     print("The type of A_transpose * A is %s\n" %type(Atranspose_A))
 
     A_Atranspose_A=matrix.map(lambda line: list(np.dot(line,row_permutation)))
