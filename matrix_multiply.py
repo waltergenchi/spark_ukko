@@ -66,7 +66,7 @@ def main():
     #print(row_permutation.collect())
     print("\n ** Reduce Operation ** \n")
     start_reduce1 = time.time()
-    Atranspose_A = Atranspose_A.reduce(add)
+    Atranspose_A = Atranspose_A.reduce(lambda mat: np.add(mat))
     end_reduce1 = time.time()
     takenTime_reduce1 = end_reduce1-start_reduce1
     print("    TAKEN TIME by REDUCE ACTION: %f" %takenTime_reduce1)
