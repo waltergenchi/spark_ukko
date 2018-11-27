@@ -6,13 +6,13 @@ import numpy as np
 from operator import add
 import time
 
-# the outer product is function used for the first mapping (i.e. multiplication A_t + A)
+# the outer product is function used for the first mapping (i.e. multiplication A_t * A)
 def multiply(row):
     return np.outer(row,row)
 
 def main():
     #dataset = "data-2-105.txt" # dataset with 10^5 rows, works fine in almost 70 seconds
-    dataset = "stupido.txt" # dataset with 10^3 rows, work fine in almost 5 seconds
+    dataset = "data-2-sample.txt" # dataset with 10^3 rows, work fine in almost 5 seconds
 
     conf = (SparkConf()
             .setAppName("genchi")           ##change app name to your username
@@ -28,6 +28,8 @@ def main():
 
     print("\n\nReading file and converting numbers in float for each line")
     matrix = data_file.map(lambda line: line.split()).map(lambda value: [float(i) for i in value])
+    print("\n\nPutting index on each row of the RDD")
+    matrix=matrix.zipWithIndex().map(lambda (vals,index): (index,vals))
     
     
     print("\n\n**** Matrix A ****")
@@ -46,16 +48,14 @@ def main():
 
     print("\n ** Mapping Operation ** \n")
     start_map1 = time.time()
-    Atranspose_A = matrix.map(lambda row: multiply(row)).zipWithIndex()
-    Atranspose_A = Atranspose_A.map(lambda (vals,index): (index//10000,vals))
+    Atranspose_A = matrix.map(lambda row: multiply(row[1]))
     end_map1 = time.time()
     takenTime_map1 = end_map1-start_map1
     print("    TAKEN TIME by MAPPING TRANSFORMATION: %f" %takenTime_map1)
 
     print("\n ** Reduce Operation ** \n")
     start_reduce1 = time.time()
-    Atranspose_A = Atranspose_A.reduceByKey(add)
-    Atranspose_A = Atranspose_A.map(lambda (index,vals): vals).reduce(add)
+    Atranspose_A=Atranspose_A.reduce(add) # bottlneck, ~56 seconds with 10^5 rows vs. ~3 seconds with 10^3 rows
     end_reduce1 = time.time()
     takenTime_reduce1 = end_reduce1-start_reduce1
     print("    TAKEN TIME by REDUCE ACTION: %f" %takenTime_reduce1)
@@ -90,9 +90,10 @@ def main():
     print("FINAL NUMBER OF COLUMNS : %d" %nCol[0])
 
     print("The type of A * A_transpose * A is %s\n\n" %type(Atranspose_A))
-    print(A_Atranspose_A.collect())
+    
+    #print(A_Atranspose_A.collect())
 
-    # saving file as:
+    # trying to save file as:
     # A_Atranspose_A=A_Atranspose_A.map(lambda line: str(row[1]))
     # A_Atranspose_A.saveAsTextFile("output2_genchi.txt")
 
