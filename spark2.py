@@ -47,13 +47,13 @@ def main():
 
     print("\n ** Mapping Operation ** \n")
     start_map1 = time.time()
-    Atranspose_A = matrix.map(lambda row: multiply(row)) # very small amount of time
+    Atranspose_A = matrix.map(lambda row: multiply(row)).zipwithIndex().map(lambda (vals,index): (index//2,vals)) # very small amount of time
     end_map1 = time.time()
     takenTime_map1 = end_map1-start_map1
     print("    TAKEN TIME by MAPPING TRANSFORMATION: %f" %takenTime_map1)
 
     print(Atranspose_A.take(1))
-    print(Atranspose_A.take(1)[0].shape)
+    #print(Atranspose_A.take(1)[0].shape)
 
 
     print("\n ** Reduce Operation ** \n")
