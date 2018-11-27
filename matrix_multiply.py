@@ -42,8 +42,8 @@ def main():
     #print(matrix.collect())
 
     print("Computing the number of rows of A\n")
-    nRows=matrix.count()
-    print("Number of rows of A: %d\n", % (nRows) )
+    countA=matrix.count()
+    print("Number of rows of A: %d\n", % (countA) )
 
 
     print("Computing the number of columns of A\n")
