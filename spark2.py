@@ -117,5 +117,7 @@ def main():
 
     print("The type of A * A_transpose * A is %s\n\n" %type(Atranspose_A))
 
+    print(A_Atranspose_A.collect())
+
 if __name__ == "__main__":
     main()
