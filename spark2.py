@@ -29,6 +29,8 @@ def main():
     # Read matrix from file and split the lines based on space and use float for items
     print("\n\nReading file and converting numbers in float for each line")
     matrix = data_file.map(lambda line: line.split()).map(lambda value: [float(i) for i in value])
+    print("\n\nPutting index on each row of the RDD")
+    matrix=matrix.zipWithIndex().map(lambda (vals,index): (index,vals))
     
     '''
     print("\n\n**** Matrix A ****")
@@ -48,7 +50,7 @@ def main():
 
     print("\n ** Mapping Operation ** \n")
     start_map1 = time.time()
-    Atranspose_A = matrix.map(lambda row: multiply(row))
+    Atranspose_A = matrix.map(lambda row: multiply(row[1]))
     print("\n\n\n\n\n")
     #Atranspose_A = Atranspose_A.zipWithIndex()
     print("\n\n\n\n\n")
@@ -94,7 +96,7 @@ def main():
 
     print("\n ** Mapping Operation ** \n")
     start_map2 = time.time()
-    A_Atranspose_A=matrix.map(lambda line: list(np.dot(line,Atranspose_A))) # very small amount of time
+    A_Atranspose_A=matrix.map(lambda line: (line[0],list(np.dot(line[1],Atranspose_A)))) # very small amount of time
     end_map2 = time.time()
     takenTime_map2 = end_map2-start_map2
     print("    TAKEN TIME by MAPPING TRANSFORMATION: %f" %takenTime_map2)
