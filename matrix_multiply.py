@@ -90,12 +90,12 @@ def main():
     end_count = time.time()
     print("\n ** Count Operation ** \n")
     takenTime_count = end_count-start_count
-    print("TAKEN TIME by COUNT ACTION: %f\n" %takenTime_count)
-    print("\n\nNUMBER OF ROWS: %d" %nRows)
+    print("TAKEN TIME by COUNT ACTION: %f" %takenTime_count)
+    print("\n\nFINAL NUMBER OF ROWS: %d" %nRows)
 
     Col = A_Atranspose_A.take(1)
     nCol = [len(x)for x in Col]
-    print("NUMBER OF COLUMNS : %d" %nCol[0])
+    print("FINAL NUMBER OF COLUMNS : %d" %nCol[0])
 
     print("The type of A * A_transpose * A is %s" %type(Atranspose_A))
 
