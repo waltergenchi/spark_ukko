@@ -60,7 +60,7 @@ def main():
     print("The shape of A_transpose * A is (%d,%d)\n" %(Atranspose_A.shape[0],Atranspose_A.shape[1]))
     print("The type of A_transpose * A is %s\n" %type(Atranspose_A))
 
-    A_Atranspose_A=matrix.map(lambda line: list(np.dot(line,row_permutation)))
+    A_Atranspose_A=matrix.map(lambda line: list(np.dot(line,Atranspose_A)))
 
     print("Computing the number of rows of A * A_transpose * A\n")
     nRows=A_Atranspose_A.count()
