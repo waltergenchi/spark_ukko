@@ -41,7 +41,7 @@ def main():
     matrix = data_file.map(lambda line: line.split()).map(lambda value: [float(i) for i in value])
     
     #print(matrix.collect())
-
+    '''
     print("\n\n**** Matrix A ****")
     print("Computing the number of rows of A\n")
     nRows=matrix.count()
@@ -51,7 +51,7 @@ def main():
     Col = matrix.take(1)
     nCols = [len(x)for x in Col]
     print("NUMBER OF COLUMNS of A: %d\n" % nCols[0] )
-
+    '''
 
 
 
@@ -66,7 +66,7 @@ def main():
     #print(row_permutation.collect())
     print("\n ** Reduce Operation ** \n")
     start_reduce1 = time.time()
-    Atranspose_A = Atranspose_A.reduce(lambda mat: np.add(mat))
+    Atranspose_A = Atranspose_A.map(lambda mat: np.add(mat))
     end_reduce1 = time.time()
     takenTime_reduce1 = end_reduce1-start_reduce1
     print("    TAKEN TIME by REDUCE ACTION: %f" %takenTime_reduce1)
