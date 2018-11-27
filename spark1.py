@@ -1,3 +1,5 @@
+##### WALTER GENCHI - 014961054 #####
+
 from pyspark import SparkContext, SparkConf
 import os
 import sys

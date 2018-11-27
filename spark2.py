@@ -1,3 +1,5 @@
+##### WALTER GENCHI - 014961054 #####
+
 from pyspark import SparkConf,SparkContext
 import sys
 import numpy as np
@@ -10,7 +12,7 @@ def multiply(row):
 
 def main():
     #dataset = "data-2-105.txt" # dataset with 10^5 rows, works fine in almost 70 seconds
-    dataset = "data-2-sample.txt" # dataset with 10^2 rows, work 
+    dataset = "data-2-sample.txt" # dataset with 10^3 rows, work fine in almost 5 seconds
 
     conf = (SparkConf()
             .setAppName("genchi")           ##change app name to your username
@@ -45,15 +47,17 @@ def main():
 
     print("\n ** Mapping Operation ** \n")
     start_map1 = time.time()
-    Atranspose_A = matrix.map(lambda row: multiply(row))
+    Atranspose_A = matrix.map(lambda row: multiply(row)) # very small amount of time
     end_map1 = time.time()
     takenTime_map1 = end_map1-start_map1
     print("    TAKEN TIME by MAPPING TRANSFORMATION: %f" %takenTime_map1)
 
+    print(Atranspose_A.take(1))
+
 
     print("\n ** Reduce Operation ** \n")
     start_reduce1 = time.time()
-    Atranspose_A = Atranspose_A.reduce(add)
+    Atranspose_A = Atranspose_A.reduce(add) # bottlneck, ~56 seconds with 10^5 rows vs. ~3 seconds with 10^3 rows
     end_reduce1 = time.time()
     takenTime_reduce1 = end_reduce1-start_reduce1
     print("    TAKEN TIME by REDUCE ACTION: %f" %takenTime_reduce1)
@@ -68,7 +72,7 @@ def main():
 
     print("\n ** Mapping Operation ** \n")
     start_map2 = time.time()
-    A_Atranspose_A=matrix.map(lambda line: list(np.dot(line,Atranspose_A)))
+    A_Atranspose_A=matrix.map(lambda line: list(np.dot(line,Atranspose_A))) # very small amount of time
     end_map2 = time.time()
     takenTime_map2 = end_map2-start_map2
     print("    TAKEN TIME by MAPPING TRANSFORMATION: %f" %takenTime_map2)
@@ -79,7 +83,7 @@ def main():
     nRows=A_Atranspose_A.count()
     end_count = time.time()
     takenTime_count = end_count-start_count
-    print("    TAKEN TIME by COUNT ACTION: %f" %takenTime_count)
+    print("    TAKEN TIME by COUNT ACTION: %f" %takenTime_count) # ~12 seconds with 10^5 rows vs. ~2 seconds with 10^3 rows
     
 
     print("\n\nFINAL NUMBER OF ROWS: %d" %nRows)
