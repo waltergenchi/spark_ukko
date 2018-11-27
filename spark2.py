@@ -49,7 +49,7 @@ def main():
     start_map1 = time.time()
     Atranspose_A = matrix.map(lambda row: multiply(row)).zipWithIndex()
     print("\n\n\n\n\n")
-    Atranspose_A = Atranspose_A.map(lambda (vals,index): (index//10,vals)) # very small amount of time
+    Atranspose_A = Atranspose_A.map(lambda (vals,index): (index//1000,vals)) # very small amount of time
     print("\n\n\n\n\n")
     end_map1 = time.time()
     takenTime_map1 = end_map1-start_map1
