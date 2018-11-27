@@ -58,7 +58,11 @@ def main():
 
     print("\n ** Reduce Operation ** \n")
     start_reduce1 = time.time()
-    Atranspose_A = Atranspose_A.reduceByKey(add).reduce(add) # bottlneck, ~56 seconds with 10^5 rows vs. ~3 seconds with 10^3 rows
+    Atranspose_A = Atranspose_A.reduceByKey(add)
+    print(Atranspose_A.take(2)[0])
+    print("\n\n\n\n\n\n\n")
+    print(Atranspose_A.take(2)[1])
+    #reduce(add) # bottlneck, ~56 seconds with 10^5 rows vs. ~3 seconds with 10^3 rows
     end_reduce1 = time.time()
     takenTime_reduce1 = end_reduce1-start_reduce1
     print("    TAKEN TIME by REDUCE ACTION: %f" %takenTime_reduce1)
