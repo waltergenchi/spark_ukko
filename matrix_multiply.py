@@ -23,7 +23,7 @@ def sum_values(mat):
     #return tuple(sum(x) for x in zip(a,b))
 
 def main():
-    dataset = "data-2.txt"
+    dataset = "data-2-sample.txt"
 
     conf = (SparkConf()
             .setAppName("genchi")           ##change app name to your username
@@ -80,7 +80,8 @@ def main():
 
     print("\n ** Mapping Operation ** \n")
     start_map2 = time.time()
-    A_Atranspose_A=matrix.map(lambda line: list(np.dot(line,Atranspose_A)))
+    temp=Atranspose_A.collect()
+    A_Atranspose_A=matrix.map(lambda line: list(np.dot(line,temp))
     end_map2 = time.time()
     takenTime_map2 = end_map2-start_map2
     print("    TAKEN TIME by MAPPING TRANSFORMATION: %f" %takenTime_map2)
