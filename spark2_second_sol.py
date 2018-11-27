@@ -27,7 +27,7 @@ def main():
     data_file = sc.textFile(dataset)
 
     print("\n\nReading file and converting numbers in float for each line")
-    matrix = data_file.map(lambda line: line.split()).map(lambda value: [float(i) for i in value])
+    matrix = data_file.map(lambda line: line.split()).map(lambda value: [float(i) for i in value]).zipWithIndex().map(lambda (vals,index): (index//10000,vals))
     
     
     print("\n\n**** Matrix A ****")
@@ -46,8 +46,8 @@ def main():
 
     print("\n ** Mapping Operation ** \n")
     start_map1 = time.time()
-    Atranspose_A = matrix.map(lambda row: multiply(row)).zipWithIndex()
-    Atranspose_A = Atranspose_A.map(lambda (vals,index): (index//10000,vals))
+    Atranspose_A = matrix.map(lambda row: multiply(row[1]))#.zipWithIndex()
+    #Atranspose_A = Atranspose_A.map(lambda (vals,index): (index//10000,vals))
     end_map1 = time.time()
     takenTime_map1 = end_map1-start_map1
     print("    TAKEN TIME by MAPPING TRANSFORMATION: %f" %takenTime_map1)
