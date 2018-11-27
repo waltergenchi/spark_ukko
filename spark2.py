@@ -63,7 +63,9 @@ def main():
     start_reduce1 = time.time()
     print("\n\n\n\n\n")
     Atranspose_A = Atranspose_A.reduceByKey(add)
-    print("\n\n\n\n\n")
+
+    print("***********\n\n\n\n\n***********")
+
     Atranspose_A = Atranspose_A.map(lambda (index,vals): vals).reduce(add)
 
     '''
