@@ -25,6 +25,7 @@ def main():
     sc = SparkContext(conf=conf)
 
     data_file = sc.textFile(dataset)
+    print(type(data_file))
     # Read matrix from file and split the lines based on space and use float for items
     print("\n\nReading file and converting numbers in float for each line")
     matrix = data_file.map(lambda line: line.split()).map(lambda value: [float(i) for i in value])
@@ -49,7 +50,7 @@ def main():
     start_map1 = time.time()
     Atranspose_A = matrix.map(lambda row: multiply(row)).zipWithIndex()
     print("\n\n\n\n\n")
-    Atranspose_A = Atranspose_A.map(lambda (vals,index): (index//10000,vals)) # very small amount of time
+    Atranspose_A = Atranspose_A.map(lambda (vals,index): (index//1000,vals)) # very small amount of time
     print("\n\n\n\n\n")
     end_map1 = time.time()
     takenTime_map1 = end_map1-start_map1
