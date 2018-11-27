@@ -55,7 +55,7 @@ def main():
     print("\n ** Reduce Operation ** \n")
     start_reduce1 = time.time()
     Atranspose_A = Atranspose_A.reduceByKey(add)
-    Atranspose_A = Atranspose_A.map(lambda (index,vals): vals).reduce(add)
+    Atranspose_A = Atranspose_A.reduce(add)
     end_reduce1 = time.time()
     takenTime_reduce1 = end_reduce1-start_reduce1
     print("    TAKEN TIME by REDUCE ACTION: %f" %takenTime_reduce1)
