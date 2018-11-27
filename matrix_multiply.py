@@ -42,49 +42,57 @@ def main():
     
     #print(matrix.collect())
 
+    print("\n\n**** Matrix A ****\n\n")
     print("Computing the number of rows of A\n")
     nRows=matrix.count()
-    print("Number of rows of A: %d\n" %nRows)
-
+    print("NUMBER OF ROWS of A: %d\n" %nRows)
 
     print("Computing the number of columns of A\n")
     Col = matrix.take(1)
     nCols = [len(x)for x in Col]
-    print("Number of columns of A: %d\n" % nCols[0] )
+    print("NUMBER OF COLUMNS of A: %d\n" % nCols[0] )
 
-    print("\n\n\n ***** Mapping Operation ***** \n\n\n")
+
+
+
+    print("\n\n**** Matrix A_transpose * A ****\n\n")
+
+    print("\n ** Mapping Operation ** \n")
     start_map1 = time.time()
     Atranspose_A = matrix.map(lambda row: multiply(row))
     end_map1 = time.time()
     takenTime_map1 = end_map1-start_map1
     print("TAKEN TIME by MAPPING TRANSFORMATION: %f" %takenTime_map1)
     #print(row_permutation.collect())
-    print("\n\n\n ***** Reduce Operation ***** \n\n\n")
+    print("\n ** Reduce Operation ** \n")
     start_reduce1 = time.time()
     Atranspose_A = Atranspose_A.reduce(add)
     end_reduce1 = time.time()
     takenTime_reduce1 = end_reduce1-start_reduce1
-    print("TAKEN TIME by REDUCE ACTION: %f\n" %takenTime_reduce1)
+    print("TAKEN TIME by REDUCE ACTION: %f" %takenTime_reduce1)
 
-    print("**** A_transpose * A ****\n")
-    print("The SHAPE of A_transpose * A is (%d,%d)\n" %(Atranspose_A.shape[0],Atranspose_A.shape[1]))
-    print("The TYPE of A_transpose * A is %s\n" %type(Atranspose_A))
+    print("\nThe SHAPE of A_transpose * A is (%d,%d)\n" %(Atranspose_A.shape[0],Atranspose_A.shape[1]))
+    print("\nThe TYPE of A_transpose * A is %s\n" %type(Atranspose_A))
 
+
+
+    print("\n\n\n**** Matrix A * A_transpose * A ****\n")
+
+    print("\n ** Mapping Operation ** \n")
     start_map2 = time.time()
     A_Atranspose_A=matrix.map(lambda line: list(np.dot(line,Atranspose_A)))
     end_map2 = time.time()
     takenTime_map2 = end_map2-start_map2
     print("TAKEN TIME by MAPPING TRANSFORMATION: %f" %takenTime_map2)
 
-    print("\n\n\n**** A* A_transpose * A ****\n")
     print("Computing the number of rows of A * A_transpose * A\n")
     start_count = time.time()
     nRows=A_Atranspose_A.count()
     end_count = time.time()
+    print("\n ** Count Operation ** \n")
     takenTime_count = end_count-start_count
     print("TAKEN TIME by COUNT ACTION: %f\n" %takenTime_count)
     print("NUMBER OF ROWS: %d\n" %nRows)
-
 
     print("Computing the number of columns of A * A_transpose * A\n")
     Col = A_Atranspose_A.take(1)
