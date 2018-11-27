@@ -43,13 +43,13 @@ def main():
 
     print("Computing the number of rows of A\n")
     nRows=matrix.count()
-    print("Number of rows of A: %d\n",nRows)
+    print("Number of rows of A: %d\n", %nRows)
 
 
     print("Computing the number of columns of A\n")
     Col = matrix.take(1)
     nCols = [len(x)for x in Col]
-    print("Number of columns of A: %d\n",nCol[0])
+    print("Number of columns of A: %d\n", %nCol[0])
 
     print("\n\n\n ***** Mapping Operation ***** \n\n\n")
     Atranspose_A = matrix.map(lambda row: multiply(row))
@@ -57,20 +57,20 @@ def main():
     print("\n\n\n ***** Reduce Operation ***** \n\n\n")
     Atranspose_A = Atranspose_A.reduce(add)
 
-    print("The shape of A_transpose * A is %f\n",Atranspose_A.shape)
-    print("The type of A_transpose * A is %s\n",type(Atranspose_A))
+    print("The shape of A_transpose * A is %f\n", %Atranspose_A.shape)
+    print("The type of A_transpose * A is %s\n", %type(Atranspose_A))
 
     A_Atranspose_A=matrix.map(lambda line: list(np.dot(line,row_permutation)))
 
     print("Computing the number of rows of A * A_transpose * A\n")
     nRows=A_Atranspose_A.count()
-    print("Number of rows: %d\n",nRows)
+    print("Number of rows: %d\n", %nRows)
 
 
     print("Computing the number of columns of A * A_transpose * A\n")
     Col = A_Atranspose_A.take(1)
     nCols = [len(x)for x in Col]
-    print("Number of columns of A * A_transpose * A: %d\n",nCol[0])
+    print("Number of columns of A * A_transpose * A: %d\n", %nCol[0])
 
     #print(len(ris.collect()))
     #print(ris.collect())
