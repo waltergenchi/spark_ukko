@@ -12,7 +12,7 @@ def multiply(row):
 
 def main():
     #dataset = "data-2-105.txt" # dataset with 10^5 rows, works fine in almost 70 seconds
-    dataset = "stupido.txt" # dataset with 10^3 rows, work fine in almost 5 seconds
+    dataset = "data-2-sample.txt" # dataset with 10^3 rows, work fine in almost 5 seconds
 
     conf = (SparkConf()
             .setAppName("genchi")           ##change app name to your username
@@ -91,7 +91,7 @@ def main():
 
     print("The type of A * A_transpose * A is %s\n\n" %type(Atranspose_A))
 
-    # saving file as:
+    # trying to save file as:
     # A_Atranspose_A=A_Atranspose_A.map(lambda line: str(row[1]))
     # A_Atranspose_A.saveAsTextFile("output2_genchi.txt")
 
