@@ -32,7 +32,7 @@ def main():
     print("\n\nPutting index on each row of the RDD")
     matrix=matrix.zipWithIndex().map(lambda (vals,index): (index,vals))
     
-    '''
+    
     print("\n\n**** Matrix A ****")
     print("Computing the number of rows of A\n")
     nRows=matrix.count()
@@ -42,7 +42,7 @@ def main():
     Col = matrix.take(1)
     nCols = [len(x)for x in Col]
     print("NUMBER OF COLUMNS of A: %d\n" % nCols[0] )
-    '''
+    
 
 
 
@@ -96,7 +96,7 @@ def main():
 
     print("\n ** Mapping Operation ** \n")
     start_map2 = time.time()
-    A_Atranspose_A=matrix.map(lambda line: (line[0],list(np.dot(line[1],Atranspose_A)))) # very small amount of time
+    A_Atranspose_A=matrix.map(lambda line: (line[0],list(np.dot(line[1],Atranspose_A)))).sortByKey() # very small amount of time
     end_map2 = time.time()
     takenTime_map2 = end_map2-start_map2
     print("    TAKEN TIME by MAPPING TRANSFORMATION: %f" %takenTime_map2)
