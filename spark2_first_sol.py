@@ -12,7 +12,7 @@ def multiply(row):
 
 def main():
     #dataset = "data-2-105.txt" # dataset with 10^5 rows, works fine in almost 70 seconds
-    dataset = "data-2-sample.txt" # dataset with 10^3 rows, work fine in almost 5 seconds
+    dataset = "stupido.txt" # dataset with 10^3 rows, work fine in almost 5 seconds
 
     conf = (SparkConf()
             .setAppName("genchi")           ##change app name to your username
