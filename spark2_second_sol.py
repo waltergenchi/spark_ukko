@@ -28,8 +28,6 @@ def main():
 
     print("\n\nReading file and converting numbers in float for each line")
     matrix = data_file.map(lambda line: line.split()).map(lambda value: [float(i) for i in value])
-    print("\n\nPutting index on each row of the RDD")
-    matrix=matrix.zipWithIndex().map(lambda (vals,index): (index,vals))
     
     
     print("\n\n**** Matrix A ****")
@@ -48,8 +46,8 @@ def main():
 
     print("\n ** Mapping Operation ** \n")
     start_map1 = time.time()
-    Atranspose_A = matrix.map(lambda row: multiply(row[1]))
-    Atranspose_A.map(lambda (index,vals): (index//1000,vals))
+    Atranspose_A = matrix.map(lambda row: multiply(row)).zipWithIndex()
+    Atranspose_Atranspose_A.map(lambda (vals,index): (index//10000,vals))
     end_map1 = time.time()
     takenTime_map1 = end_map1-start_map1
     print("    TAKEN TIME by MAPPING TRANSFORMATION: %f" %takenTime_map1)
@@ -58,8 +56,7 @@ def main():
     start_reduce1 = time.time()
     print("\n\n\n\n\n")
     Atranspose_A = Atranspose_A.reduceByKey(add)
-    Atranspose_A = Atranspose_A.map(lambda (index,vals): vals)
-    Atranspose_A=Atranspose_A.reduce(add)
+    Atranspose_A = Atranspose_A.map(lambda (index,vals): vals).reduce(add)
     end_reduce1 = time.time()
     takenTime_reduce1 = end_reduce1-start_reduce1
     print("    TAKEN TIME by REDUCE ACTION: %f" %takenTime_reduce1)
