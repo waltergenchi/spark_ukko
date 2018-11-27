@@ -54,7 +54,6 @@ def main():
 
     print("\n ** Reduce Operation ** \n")
     start_reduce1 = time.time()
-    print("\n\n\n\n\n")
     Atranspose_A = Atranspose_A.reduceByKey(add)
     Atranspose_A = Atranspose_A.map(lambda (index,vals): vals).reduce(add)
     end_reduce1 = time.time()
