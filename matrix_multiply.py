@@ -49,7 +49,7 @@ def main():
     print("Computing the number of columns of A\n")
     Col = matrix.take(1)
     nCols = [len(x)for x in Col]
-    print("Number of columns of A: %d\n", %nCol[0])
+    print("Number of columns of A: %d\n", % (nCols[0]) )
 
     print("\n\n\n ***** Mapping Operation ***** \n\n\n")
     Atranspose_A = matrix.map(lambda row: multiply(row))
