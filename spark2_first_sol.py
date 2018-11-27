@@ -6,7 +6,7 @@ import numpy as np
 from operator import add
 import time
 
-# the outer product is function used for the first mapping (i.e. multiplication A_t + A)
+# the outer product is function used for the first mapping (i.e. multiplication A_t * A)
 def multiply(row):
     return np.outer(row,row)
 
@@ -25,8 +25,7 @@ def main():
     sc = SparkContext(conf=conf)
 
     data_file = sc.textFile(dataset)
-    print(type(data_file))
-    # Read matrix from file and split the lines based on space and use float for items
+
     print("\n\nReading file and converting numbers in float for each line")
     matrix = data_file.map(lambda line: line.split()).map(lambda value: [float(i) for i in value])
     print("\n\nPutting index on each row of the RDD")
@@ -50,37 +49,13 @@ def main():
     print("\n ** Mapping Operation ** \n")
     start_map1 = time.time()
     Atranspose_A = matrix.map(lambda row: multiply(row[1]))
-    print("\n\n\n\n\n")
-    #Atranspose_A = Atranspose_A.zipWithIndex()
-    print("\n\n\n\n\n")
-    #Atranspose_A = Atranspose_A.map(lambda (vals,index): (index//1000,vals)) # very small amount of time
-    print("\n\n\n\n\n")
     end_map1 = time.time()
     takenTime_map1 = end_map1-start_map1
     print("    TAKEN TIME by MAPPING TRANSFORMATION: %f" %takenTime_map1)
 
-    #print(Atranspose_A.take(1))
-    #print(Atranspose_A.take(1)[0].shape)
-
-
     print("\n ** Reduce Operation ** \n")
     start_reduce1 = time.time()
-    print("\n\n\n\n\n")
-    #Atranspose_A = Atranspose_A.reduceByKey(add) #immediate
-
-    print("***********\n\n\n\n\n***********")
-
-    #Atranspose_A = Atranspose_A.map(lambda (index,vals): vals).reduce(add) #67 seconds
-    Atranspose_A=Atranspose_A.reduce(add)
-    '''
-    print(Atranspose_A.take(2)[0])
-    print("\n\n\n\n\n\n\n")
-    print(Atranspose_A.take(2)[1])
-    print("\n\n\n\n\n\n\n")
-    print(Atranspose_A.take(5))
-    '''
-
-    #reduce(add) # bottlneck, ~56 seconds with 10^5 rows vs. ~3 seconds with 10^3 rows
+    Atranspose_A=Atranspose_A.reduce(add) # bottlneck, ~56 seconds with 10^5 rows vs. ~3 seconds with 10^3 rows
     end_reduce1 = time.time()
     takenTime_reduce1 = end_reduce1-start_reduce1
     print("    TAKEN TIME by REDUCE ACTION: %f" %takenTime_reduce1)
