@@ -58,21 +58,21 @@ def main():
     Atranspose_A = Atranspose_A.reduce(add)
 
     print("**** A_transpose * A ****\n")
-    print("The shape of A_transpose * A is (%d,%d)\n" %(Atranspose_A.shape[0],Atranspose_A.shape[1]))
-    print("The type of A_transpose * A is %s\n" %type(Atranspose_A))
+    print("The SHAPE of A_transpose * A is (%d,%d)\n" %(Atranspose_A.shape[0],Atranspose_A.shape[1]))
+    print("The TUPE of A_transpose * A is %s\n" %type(Atranspose_A))
 
     A_Atranspose_A=matrix.map(lambda line: list(np.dot(line,Atranspose_A)))
 
-    print("**** A* A_transpose * A ****\n")
+    print("\n\n\n**** A* A_transpose * A ****\n")
     print("Computing the number of rows of A * A_transpose * A\n")
     nRows=A_Atranspose_A.count()
-    print("Number of rows: %d\n" %nRows)
+    print("NUMBER OF ROWS: %d\n" %nRows)
 
 
     print("Computing the number of columns of A * A_transpose * A\n")
     Col = A_Atranspose_A.take(1)
     nCol = [len(x)for x in Col]
-    print("Number of columns of A * A_transpose * A: %d\n" %nCol[0])
+    print("NUMBER OF COLUMNS : %d\n" %nCol[0])
 
     print("The type of A * A_transpose * A is %s\n" %type(Atranspose_A))
 
