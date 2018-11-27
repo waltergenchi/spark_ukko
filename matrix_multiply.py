@@ -37,12 +37,12 @@ def main():
 
     data_file = sc.textFile(dataset)
     # Read matrix from file and split the lines based on space and use float for items
-    print("Reading file and converting numbers in float for each line\n")
+    print("\n\nReading file and converting numbers in float for each line")
     matrix = data_file.map(lambda line: line.split()).map(lambda value: [float(i) for i in value])
     
     #print(matrix.collect())
 
-    print("\n\n**** Matrix A ****\n\n")
+    print("\n\n**** Matrix A ****")
     print("Computing the number of rows of A\n")
     nRows=matrix.count()
     print("NUMBER OF ROWS of A: %d\n" %nRows)
@@ -55,7 +55,7 @@ def main():
 
 
 
-    print("\n\n**** Matrix A_transpose * A ****\n\n")
+    print("\n\n**** Matrix A_transpose * A ****")
 
     print("\n ** Mapping Operation ** \n")
     start_map1 = time.time()
@@ -71,12 +71,12 @@ def main():
     takenTime_reduce1 = end_reduce1-start_reduce1
     print("TAKEN TIME by REDUCE ACTION: %f" %takenTime_reduce1)
 
-    print("\nThe SHAPE of A_transpose * A is (%d,%d)\n" %(Atranspose_A.shape[0],Atranspose_A.shape[1]))
-    print("\nThe TYPE of A_transpose * A is %s\n" %type(Atranspose_A))
+    print("\n\nThe SHAPE of A_transpose * A is (%d,%d)" %(Atranspose_A.shape[0],Atranspose_A.shape[1]))
+    print("The TYPE of A_transpose * A is %s" %type(Atranspose_A))
 
 
 
-    print("\n\n\n**** Matrix A * A_transpose * A ****\n")
+    print("\n\n\n**** Matrix A * A_transpose * A ****")
 
     print("\n ** Mapping Operation ** \n")
     start_map2 = time.time()
@@ -85,21 +85,19 @@ def main():
     takenTime_map2 = end_map2-start_map2
     print("TAKEN TIME by MAPPING TRANSFORMATION: %f" %takenTime_map2)
 
-    print("Computing the number of rows of A * A_transpose * A\n")
     start_count = time.time()
     nRows=A_Atranspose_A.count()
     end_count = time.time()
     print("\n ** Count Operation ** \n")
     takenTime_count = end_count-start_count
     print("TAKEN TIME by COUNT ACTION: %f\n" %takenTime_count)
-    print("NUMBER OF ROWS: %d\n" %nRows)
+    print("\n\nNUMBER OF ROWS: %d" %nRows)
 
-    print("Computing the number of columns of A * A_transpose * A\n")
     Col = A_Atranspose_A.take(1)
     nCol = [len(x)for x in Col]
-    print("NUMBER OF COLUMNS : %d\n" %nCol[0])
+    print("NUMBER OF COLUMNS : %d" %nCol[0])
 
-    print("The type of A * A_transpose * A is %s\n" %type(Atranspose_A))
+    print("The type of A * A_transpose * A is %s" %type(Atranspose_A))
 
     #print(len(ris.collect()))
     #print(ris.collect())
