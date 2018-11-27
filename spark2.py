@@ -47,7 +47,7 @@ def main():
 
     print("\n ** Mapping Operation ** \n")
     start_map1 = time.time()
-    Atranspose_A = matrix.map(lambda row: multiply(row)).zipWithIndex().map(lambda (vals,index): (index//2,vals)) # very small amount of time
+    Atranspose_A = matrix.map(lambda row: multiply(row)).zipWithIndex().map(lambda (vals,index): (index//10,vals)) # very small amount of time
     end_map1 = time.time()
     takenTime_map1 = end_map1-start_map1
     print("    TAKEN TIME by MAPPING TRANSFORMATION: %f" %takenTime_map1)
@@ -58,7 +58,7 @@ def main():
 
     print("\n ** Reduce Operation ** \n")
     start_reduce1 = time.time()
-    Atranspose_A = Atranspose_A.reduce(add) # bottlneck, ~56 seconds with 10^5 rows vs. ~3 seconds with 10^3 rows
+    Atranspose_A = Atranspose_A.reduceByKey(add).reduce(add) # bottlneck, ~56 seconds with 10^5 rows vs. ~3 seconds with 10^3 rows
     end_reduce1 = time.time()
     takenTime_reduce1 = end_reduce1-start_reduce1
     print("    TAKEN TIME by REDUCE ACTION: %f" %takenTime_reduce1)
