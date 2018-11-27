@@ -12,7 +12,7 @@ def multiply(row):
 
 def main():
     #dataset = "data-2-105.txt" # dataset with 10^5 rows, works fine in almost 70 seconds
-    dataset = "data-2.txt" # dataset with 10^3 rows, work fine in almost 5 seconds
+    dataset = "data-2-sample.txt" # dataset with 10^3 rows, work fine in almost 5 seconds
 
     conf = (SparkConf()
             .setAppName("genchi")           ##change app name to your username
@@ -48,27 +48,29 @@ def main():
 
     print("\n ** Mapping Operation ** \n")
     start_map1 = time.time()
-    Atranspose_A = matrix.map(lambda row: multiply(row)).zipWithIndex()
+    Atranspose_A = matrix.map(lambda row: multiply(row))
     print("\n\n\n\n\n")
-    Atranspose_A = Atranspose_A.map(lambda (vals,index): (index//1000,vals)) # very small amount of time
+    #Atranspose_A = Atranspose_A.zipWithIndex()
+    print("\n\n\n\n\n")
+    #Atranspose_A = Atranspose_A.map(lambda (vals,index): (index//1000,vals)) # very small amount of time
     print("\n\n\n\n\n")
     end_map1 = time.time()
     takenTime_map1 = end_map1-start_map1
     print("    TAKEN TIME by MAPPING TRANSFORMATION: %f" %takenTime_map1)
 
-    print(Atranspose_A.take(1))
+    #print(Atranspose_A.take(1))
     #print(Atranspose_A.take(1)[0].shape)
 
 
     print("\n ** Reduce Operation ** \n")
     start_reduce1 = time.time()
     print("\n\n\n\n\n")
-    Atranspose_A = Atranspose_A.reduceByKey(add) #immediate
+    #Atranspose_A = Atranspose_A.reduceByKey(add) #immediate
 
     print("***********\n\n\n\n\n***********")
 
-    Atranspose_A = Atranspose_A.map(lambda (index,vals): vals).reduce(add) #67 seconds
-
+    #Atranspose_A = Atranspose_A.map(lambda (index,vals): vals).reduce(add) #67 seconds
+    Atranspose_A=Atranspose_A.reduce(add)
     '''
     print(Atranspose_A.take(2)[0])
     print("\n\n\n\n\n\n\n")
