@@ -47,6 +47,8 @@ def main():
     print("\n ** Mapping Operation ** \n")
     start_map1 = time.time()
     Atranspose_A = matrix.map(lambda row: multiply(row[1]))#.zipWithIndex()
+    print("*****\n\n\n")
+    print(Atranspose_A.collect())
     #Atranspose_A = Atranspose_A.map(lambda (vals,index): (index//10000,vals))
     end_map1 = time.time()
     takenTime_map1 = end_map1-start_map1
