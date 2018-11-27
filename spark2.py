@@ -53,6 +53,7 @@ def main():
     print("    TAKEN TIME by MAPPING TRANSFORMATION: %f" %takenTime_map1)
 
     print(Atranspose_A.take(1))
+    print(Atranspose_A.take(1)[0].shape)
 
 
     print("\n ** Reduce Operation ** \n")
