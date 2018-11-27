@@ -1,5 +1,3 @@
-__author__ = 'pranavgoel'
-
 from pyspark import SparkConf,SparkContext
 from pyspark.sql import SQLContext
 import sys
@@ -40,31 +38,44 @@ def main():
            )
     sc = SparkContext(conf=conf)
 
-    raw_matrix_file = sc.textFile(dataset)
+    data_file = sc.textFile(dataset)
     # Read matrix from file and split the lines based on space and use float for items
-    matrix = raw_matrix_file.map(lambda line: line.split()).map(lambda value: [float(i) for i in value])
-    #print(matrix.collect())
-    print("read file")
-
+    print("Reading file and converting numbers in float for each line\n")
+    matrix = data_file.map(lambda line: line.split()).map(lambda value: [float(i) for i in value])
     
-    #print(len(matrix.count))
-    #Col = matrix.take(1)
+    #print(matrix.collect())
 
-    #nCol = [len(x)for x in Col]
-# doing purmutation on the row by row for example a b = aa ab ba bb
+    print("Computing the number of rows\n")
+    nRows=matrix.count()
+    print("Number of rows: %d\n",nRows)
 
-# doing the sum coloumn by coloumn
-    print("**************\n\n\n\n\n\n\n Mapping Operation \n\n\n\n\n\n\n\n\n***********")
-    row_permutation = matrix.map(lambda row: multiply(row))
+
+    print("Computing the number of columns\n")
+    Col = matrix.take(1)
+    nCols = [len(x)for x in Col]
+    print("Number of columns: %d\n",nCol[0])
+
+    print("\n\n\n ***** Mapping Operation ***** \n\n\n")
+    Atranspose_A = matrix.map(lambda row: multiply(row))
     #print(row_permutation.collect())
-    print("**************\n\n\n\n\n\n\n Reduce Operation \n\n\n\n\n\n\n\n\n***********")
-    row_permutation = row_permutation.reduce(add)
-    #print(row_permutation)
-    print(row_permutation.shape)
-    print(type(row_permutation))
-    #print(row_permutation[:,0])
+    print("\n\n\n ***** Reduce Operation ***** \n\n\n")
+    Atranspose_A = Atranspose_A.reduce(add)
 
-    ris=matrix.map(lambda line: list(np.dot(line,row_permutation)))
+    print("The shape of A_transpose * A is %f\n",Atranspose_A.shape)
+    print("The type of A_transpose * A is %s\n",type(Atranspose_A))
+
+    A_Atranspose_A=matrix.map(lambda line: list(np.dot(line,row_permutation)))
+
+    print("Computing the number of rows\n")
+    nRows=matrix.count()
+    print("Number of rows: %d\n",nRows)
+
+
+    print("Computing the number of columns\n")
+    Col = matrix.take(1)
+    nCols = [len(x)for x in Col]
+    print("Number of columns: %d\n",nCol[0])
+
     print(len(ris.collect()))
     #print(ris.collect())
     '''
