@@ -43,7 +43,7 @@ def main():
 
     print("Computing the number of rows of A\n")
     nRows=matrix.count()
-    print("Number of rows of A: %d\n", %nRows)
+    print("Number of rows of A: %d\n", % nRows)
 
 
     print("Computing the number of columns of A\n")
