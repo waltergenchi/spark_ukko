@@ -20,3 +20,6 @@ The data-1.txt is in the following format.
 The file has one billion rows and each row contains only one float number.
 
 data-2.txt is text file containing a 1000000 x 1000 matrix. The file is stored in the text format, and each line represents a row vector. The row contains 1000 float numbers which are separated by white-spaces.
+
+# Documentation
+It can be found in the file "project1_documentation.pdf".
