@@ -1,4 +1,4 @@
-##### WALTER GENCHI - 014961054 #####
+##### WALTER GENCHI - 014961054 ######
 
 from pyspark import SparkConf,SparkContext
 import sys
